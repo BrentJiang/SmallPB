@@ -1,0 +1,1462 @@
+<?xml version="1.0" encoding="GB2312"?>
+<EntityModel version="1.0" lastUpdate="2017.10.25">
+  <Entities>
+    <Entity name="TradeDate" title="交易日期" description="交易日期" dbTable="yes">
+      <!-- 交易日信息 -->
+      <Field name="TradingDay" label="交易日" description="交易日" iskey="yes"/>
+      <Field name="NextTradingDay" label="下一交易日" description="下一交易日" />
+      <!-- 增加下一交易日 系统需维护好交易日历信息 -->
+      <Field name="SystemStatus" label="系统状态" description="系统状态" />
+    </Entity>
+
+    <Entity name="Instrument" title="期权合约" description="期权合约" dbTable="yes">
+      <!-- 证券代码信息 存放交易系统证券基础信息 -->
+      <Field name="ExchangeID"  label="交易所代码" description="交易所代码" iskey="yes"/>
+      <Field name="ProductID"   label="产品代码" description="产品代码" iskey="yes" />
+      <Field name="InstrumentID"  label="合约代码" description="合约代码" iskey="yes" />
+      <Field name="InstrumentCode"  label="合约交易代码" description="合约交易代码"/>
+      <Field name="InstrumentName"  label="合约名称" description="合约名称"/>
+      <Field name="ProductClass" label="产品类型" description="产品类型"/>
+      <Field name="VolumeMultiple" label="合约数量乘数" description="合约数量乘数"/>
+      <Field name="PriceTick" label="最小变动价位" description="最小变动价位"/>
+      <Field name="OpenDate" label="上市日" description="上市日"/>
+      <Field name="ExpireDate" label="到期日" description="到期日"/>
+      <Field name="IsTrading" label="当前是否交易" description="当前是否交易"/>
+      <!-- 1-是 0-否  -->
+      <!-- 需要根据行情数据进行变更  -->
+      <Field name="ExecPrice" label="期权执行价格" description="期权执行价格"/>
+      <Field name="UnitMargin" label="期权单手保证金" description="期权单手保证金"/>
+      <Field name="TradingDay" label="交易日" description="交易日"/>
+      <Field name="ExerciseDay" label="行权日" description="行权日" />
+      <Field name="StartDeliveryDay" label="开始交割日" description="开始交割日" />
+      <Field name="EndDeliveryDay" label="结束交割日" description="结束交割日" />
+      <Field name="MaxMarketOrderVolume" label="市价最大下单量" description="市价最大下单量，交易时需判断" />
+      <Field name="MinMarketOrderVolume" label="市价最小下单量" description="市价最小下单量，交易时需判断" />
+      <Field name="MaxLimitOrderVolume" label="限价最大下单量" description="限价最大下单量，交易时需判断" />
+      <Field name="MinLimitOrderVolume" label="限价最小下单量" description="限价最小下单量，交易时需判断" />
+      <Field name="UpperLimitPrice"  label="涨停板价" description="涨停板价" />
+      <Field name="LowerLimitPrice"  label="跌停板价" description="跌停板价" />
+      <Field name="OptionType" label="期权类型" description="期权类型，认购、认沽" />
+      <Field name="BuyVolumeTick" label="最小买入变动手数" description="最小买入变动手数" />
+      <Field name="SellVolumeTick" label="最小卖出变动手数" description="最小卖出变动手数" />
+      <Field name="UnderlyingInstrumentID" label="基础商品代码" description="基础商品代码" />
+      <Field name="UnderlyingMultiple" label="基础商品乘数" description="基础商品乘数" />
+	  <Field name="StockRealBack" label="回报证券标志" description="回报证券标志" />
+	  <Field name="FundRealBack" label="回报资金标志" description="回报资金标志" />
+      <!-- 以下信息需要根据行情数据进行变更 以下的证券基础信息是用于风控指标计算时进行证券统计范围的筛选条件用 
+      计划从基础数据库中获取 
+	  <Field name="YesClosePrice" label="昨收盘价" description="昨收盘价"/>
+	  <Field name="TotalEquity" label="总股本" description="总股本"/>
+	  <Field name="FlowEquity" label="流通股本" description="流通股本"/>
+	  <Field name="OpenPrice" label="今开盘价" description="今开盘价"/>
+	  <Field name="LastPrice" label="最新价" description="最新价"/>    -->
+    </Entity>
+
+    <!-- 登录相关 start -->
+    <Entity name="Company" title="公司信息" description="公司信息" dbTable="yes" >
+      <!--公司信息 -->
+      <Field name="CompanyID" label="公司编号" description="公司编号" iskey="yes" />
+      <Field name="CompanyName" label="公司名称" description="公司名称"/>
+      <Field name="CompanyType" label="公司类型" description="公司类型"/>
+      <!-- <Field name="TradingDay" label="交易日" description="交易日" iskey="yes"/> -->
+    </Entity>
+
+    <Entity name="Operator" title="公司操作员信息" description="公司操作员信息" dbTable="yes" >
+      <!--公司操作员信息 -->
+      <Field name="OperatorID" label="操作员编号" description="操作员编号" iskey="yes" />
+      <Field name="CompanyID" label="公司编号" description="公司编号" />
+      <Field name="OperatorName" label="操作员名称" description="操作员名称"/>
+      <Field name="Password" label="操作员登录密码" description="操作员登录密码"/>
+      <Field name="OpRoles" label="操作员角色" description="操作员角色"/>
+      <!--操作员角色：RoleID的集合 多个roleid用逗号（,）分隔-->
+      <Field name="QryAccountIDs" label="操作员可以查询的账户集合" description="操作员可以查询的账户集合"/>
+      <!--操作员可以查询的账户集合，使用逗号分隔。  -->
+      <Field name="OpAccountIDs" label="操作员可以操作的账户集合" description="操作员可以操作的账户集合"/>
+      <!--操作员可以操作的账户集合，使用逗号分隔。如果操作员有相应的账户操作权限，则可以操作该账户下的所有组合进行交易  -->
+      <Field name="OpTel" label="操作员电话" description="操作员电话"/>
+      <Field name="OpEmail" label="操作员邮箱" description="操作员邮箱"/>
+      <Field name="RegiDate" label="注册时间" description="注册时间"/>
+      <Field name="EnbFlag" label="状态标志" description="状态标志"/>
+      <!--‘N’ – 正常 ‘C’ – 被关闭 ‘L’ – 锁定，密码错误次数超限  -->
+      <Field name="UptTime" label="修改时间" description="修改时间"/>
+      <Field name="LogTime" label="登录时间" description="登录时间"/>
+      <Field name="PwdUptTime" label="密码修改时间" description="密码修改时间"/>
+      <Field name="LogErrTime" label="登录错误时间" description="登录错误时间"/>
+      <Field name="PwdErrCnt" label="密码错误次数" description="密码错误次数"/>
+      <Field name="Remark" label="备注" description="备注"/>
+      <Field name="CompanyType" label="公司类型" description="公司类型"/>
+      <!-- <Field name="TradingDay" label="交易日" description="交易日" iskey="yes"/> -->
+    </Entity>
+    <!-- 登录相关 end -->
+
+    <!-- 权限相关 start -->
+    <Entity name="AuthInfo" title="系统权限信息" description="系统权限信息" dbTable="yes" >
+      <Field name="AuthID" label="权限ID" description="权限ID" iskey="yes" />
+      <!--"权限为四级管理：1 2位 一级菜单,3 4位 表示二级菜单, 5 6 位 表示三级菜单,7 8位表示四级菜单"-->
+      <Field name="AuthLevel" label="权限级别" description="权限级别" />
+      <!--"1 – 一级权限 ,2 – 二级权限,3 - 三级权限,4 - 四级权限"-->
+      <Field name="AuthDesc" label="权限描述" description="权限描述"/>
+      <Field name="ParentID" label="父权限" description="父权限"/>
+      <Field name="HaveSon" label="是否有下级权限" description="是否有下级权限"/>
+      <Field name="ID" label="顺序号" description="顺序号"/>
+      <!--同级权限在页面的显示位置，按照此顺序由小到大排列。  -->
+      <Field name="EnbFlag" label="状态标志" description="状态标志"/>
+      <!--‘N’ – 正常 ‘C’ – 被关闭  -->
+      <Field name="IsDefault" label="是否为默认对操作员开放" description="是否为默认对操作员开放"/>
+      <!--1 – 是 0 – 否  -->
+      <Field name="IsDisplay" label="权限是否作为功能显示在控台" description="权限是否作为功能显示在控台"/>
+      <!--1 – 是 0 – 否  -->
+      <Field name="Action" label="动作" description="动作"/>
+      <Field name="Resv" label="保留" description="保留"/>
+      <Field name="CrtTime" label="创建时间" description="创建时间"/>
+      <Field name="LastUptTime" label="最近一次更新时间" description="最近一次更新时间"/>
+      <Field name="ActionType" label="功能类型" description="功能类型"/>
+      <Field name="AuthType" label="权限类型" description="权限类型"/>
+    </Entity>
+
+    <Entity name="OpAuthInfo" title="操作员权限信息" description="操作员权限信息" dbTable="yes" >
+      <Field name="OperatorID" label="操作员编号" description="操作员编号" iskey="yes" />
+      <Field name="AuthID" label="权限ID" description="权限ID" iskey="yes" />
+      <Field name="EnbFlag" label="状态标志" description="状态标志"/>
+      <!--‘N’ – 正常 ‘C’ – 被关闭  -->
+      <Field name="LastUsrTime" label="最近一次使用时间" description="最近一次使用时间"/>
+      <Field name="UsrCount" label="使用次数" description="使用次数"/>
+      <Field name="Resv" label="保留" description="保留"/>
+      <Field name="CrtTime" label="创建时间" description="创建时间"/>
+      <Field name="LastUptTime" label="最近一次更新时间" description="最近一次更新时间"/>
+    </Entity>
+
+    <Entity name="IntefAuthInfo" title="接口权限" description="操作员权限信息" dbTable="yes" >
+      <Field name="CmdID" label="接口标识" description="接口标识" iskey="yes"/>
+      <Field name="AuthID" label="权限ID" description="权限ID" />
+    </Entity>
+
+    <Entity name="OpLog" title="操作员日志" description="操作员日志" dbTable="yes" >
+      <Field name="SysDate" label="系统日期" description="系统日期" />
+      <Field name="SysTime" label="系统时间" description="系统时间" />
+      <Field name="OperatorID" label="操作员编号" description="操作员编号" />
+      <Field name="Action" label="动作" description="动作" />
+      <Field name="ActionDesc" label="动作描述" description="动作描述" />
+    </Entity>
+
+    <Entity name="Role" title="角色信息" description="角色信息表" dbTable="yes" >
+      <Field name="RoleID" label="角色号" description="角色号" iskey="yes" />
+      <Field name="RoleName" label="角色名称" description="角色名称" />
+      <Field name="CompanyType" label="公司类型" description="公司类型" />
+    </Entity>
+
+    <Entity name="RoleAuth" title="角色权限信息" description="角色权限信息" dbTable="yes" >
+      <Field name="RoleID" label="角色号" description="角色号" iskey="yes" />
+      <Field name="AuthID" label="权限ID" description="权限ID" iskey="yes" />
+    </Entity>
+
+    <Entity name="FileDownload" title="下载文件列表" description="下载文件列表" dbTable="yes" >
+      <Field name="SysDate" label="系统日期" description="系统日期" iskey="yes" />
+      <Field name="SysSeqID" label="系统流水" description="系统流水" iskey="yes" />
+      <Field name="OperatorID" label="操作员编号" description="操作员编号" />
+      <Field name="FileName" label="文件名称" description="文件名称" />
+      <Field name="FileUrl" label="文件存储路径" description="文件存储路径" />
+      <Field name="FileInfo" label="文件查询条件" description="文件查询条件" />
+      <Field name="FileFlag" label="请求执行状态" description="请求执行状态" />
+      <Field name="FilePostFix" label="后缀文件类型" description="后缀文件类型" />
+      <Field name="CreateDate" label="文件生成日期" description="文件生成日期" />
+      <Field name="CreateTime" label="文件生成时间" description="文件生成时间" />
+      <Field name="UpdateDate" label="更新日期" description="更新日期" />
+      <Field name="UpdateTime" label="更新时间" description="更新时间" />
+    </Entity>
+
+    <Entity name="CmdSequence" title="控台序列表" description="控台序列表" dbTable="yes" >
+      <Field name="SeqName" label="序列名称" description="序列名称" iskey="yes" />
+      <Field name="CurrentVal" label="当前序列值" description="当前序列值" />
+      <Field name="IncrementVal" label="当前增长值" description="当前增长值" />
+    </Entity>
+
+    <Entity name="OpMarket" title="操作员行情配置信息" description="操作员行情配置信息" dbTable="yes" >
+      <Field name="CompanyID" label="公司编号" description="公司编号" />
+      <Field name="OperatorID" label="操作员编号" description="操作员编号" iskey="yes" />
+      <Field name="LimitConNum" label="允许连接个数" description="允许连接个数" />
+      <Field name="LimitSubNum" label="允许订阅个数" description="允许订阅个数" />
+      <Field name="IpAddress" label="连接IP地址白名单" description="连接IP地址白名单" />
+    </Entity>
+
+    <Entity name="MarketDataPay" title="公司行情缴费信息" description="公司行情缴费信息" dbTable="yes" >
+      <Field name="CompanyID" label="公司编号" description="公司编号" iskey="yes" />
+      <Field name="ExchangeID" label="交易所" description="交易所" iskey="yes" />
+      <Field name="PaySubject" label="缴费科目" description="缴费科目" iskey="yes" />
+      <Field name="LastPayTime" label="最近缴费时间" description="最近缴费时间" />
+      <Field name="PayBalance" label="缴费金额" description="缴费金额" />
+      <Field name="StartDate" label="起始日期" description="起始日期" />
+      <Field name="EndDate" label="到期日期" description="到期日期" />
+    </Entity>
+
+    <Entity name="MarketDataPayFlow" title="公司行情缴费流水" description="公司行情缴费流水" dbTable="yes" >
+      <Field name="PayID" label="流水序号" description="流水序号" iskey="yes"/>
+      <Field name="CompanyID" label="公司编号" description="公司编号" />
+      <Field name="ExchangeID" label="交易所" description="交易所" />
+      <Field name="PaySubject" label="缴费科目" description="缴费科目" />
+      <Field name="PayTime" label="缴费时间" description="缴费时间" />
+      <Field name="PayBalance" label="缴费金额" description="缴费金额" />
+      <Field name="StartDate" label="起始日期" description="起始日期" />
+      <Field name="EndDate" label="到期日期" description="到期日期" />
+    </Entity>
+
+    <!-- 权限相关 end -->
+
+    <!-- Oms账户体系 start -->
+    <Entity name="Account" title="账户信息" description="账户信息" dbTable="yes" >
+      <Field name="AccountID" label="账户编号" description="账户编号" iskey="yes" />
+      <Field name="CompanyID" label="公司编号" description="公司编号" />
+      <Field name="AccountName" label="账户名称" description="账户名称"/>
+      <Field name="InvestorID" label="投资者代码" description="投资者代码" />
+      <Field name="AccountType" label="账户类型" description="账户类型"/>
+      <!-- 1-普通证券账户 2-信用账户 3-衍生品账户 4-期货账户 -->
+      <Field name="EnbFlag" label="状态标志" description="状态标志"/>
+      <Field name="TradingDay" label="交易日" description="交易日" iskey="yes"/>
+      <!-- 账户当前所属交易日 期货 沪深A股业务 信用业务 个股期权可共用一套交易日 -->
+      <Field name="ChannelID" label="交易通道编号" description="交易通道编号"/>
+      <Field name="DefaultCombo" label="默认组合" description="默认组合编号"/>
+      <!-- 日初核对资金和持仓出现差额资金调整到账户上，持仓调整到默认组合上 -->
+    </Entity>
+
+    <Entity name="AccountCombo" title="投资组合" description="投资组合" dbTable="yes" >
+      <!-- 投资组合表 账户层下就是组合层 对应关系为1：n 组合层共用账户层的资金和持仓 -->
+      <Field name="ComboID" label="策略代码" description="策略代码"  iskey="yes"/>
+      <Field name="AccountID" label="账户编号" description="账户编号"  />
+      <Field name="ComboName" label="策略名称" description="策略名称"/>
+      <Field name="ExchangeID"  label="交易所代码" description="交易所代码" />
+      <Field name="KeyInstrumentID"  label="投资组合对应的合约代码" description="投资组合对应的合约代码" />
+      <Field name="IsActive" label="是否活跃" description="是否活跃"/>
+      <Field name="IsDefault" label="缺省状态" description="缺省状态,是否为默认创建" notnull="yes" />
+      <Field name="TradingDay" label="交易日" description="交易日" iskey="yes"/>
+    </Entity>
+    <!-- Oms账户体系 end -->
+
+    <!-- OrderRouter账户体系 start -->
+    <Entity name="Investor" title="投资者信息" description="投资者信息" dbTable="yes" >
+      <!-- 投资者信息即资金账户信息 报盘使用数据 -->
+      <Field name="InvestorID" label="投资者编号" description="投资者编号" iskey="yes" />
+      <Field name="TradingDay" label="交易日" description="交易日" iskey="yes" />
+      <!-- 交易日主键的原因是？ 删除？-->
+      <Field name="BrokerID" label="经纪公司代码" description="经纪公司代码"/>
+      <Field name="BrokerInvestorID" label="母账户代码" description="母账户代码" />
+      <!-- 理解为系统账户编号 删除?-->
+      <Field name="UserID"  label="用户代码" description="用户代码"/>
+      <!-- 期货飞马报盘使用 在我们系统中应该是UserID与InvestorID一一对应 -->
+      <Field name="ClientID" label="客户号" description="客户号" />
+      <!--客户编号即客户号 UF20柜台系统中的客户号 一个客户号下可以有多种资金账户 如普通资金账户 信用账户 衍生品账户 -->
+      <Field name="AccountCode" label="资金账户代码" description="资金账户代码" notnull="yes" />
+      <!-- 资金账号 -->
+      <Field name="Password" label="投资者密码" description="投资者密码" />
+      <!-- 客户号\资金账号密码 -->
+      <Field name="InvestorName" label="投资者名称" description="投资者名称" />
+      <Field name="InvestorType" label="投资者类型" description="投资者类型" />
+      <Field name="IDCardType" label="证件类型" description="证件号类型 " />
+      <Field name="IDCardNo" label="证件号" description="证件号" />
+      <Field name="IsActive" label="活跃状态" description="活跃状态" notnull="yes" />
+      <Field name="GroupID" label="投资者组编号" description="投资者组编号" />
+    </Entity>
+
+
+    <Entity name="TradingCode" title="投资者交易编码" description="投资者交易编码" dbTable="yes" >
+      <!-- 即股东代码\客户编码 -->
+      <Field name="TradingDay" label="交易日" description="交易日" iskey="yes"/>
+      <!-- 删除? -->
+      <Field name="AccountID" label="账户编号" description="账户编号" iskey="yes"/>
+      <!-- 即股东代码\客户编码 -->
+      <Field name="ExchangeID" label="交易所代码" description="交易所代码" iskey="yes" />
+      <Field name="TradingCodeType" label="交易编码类型" description="交易编码类型，投机套保" iskey="yes" />
+      <Field name="TradeCode" label="交易编码" description="交易编码,证券账户" notnull="yes" />
+      <Field name="BranchID" label="营业部代码" description="营业部代码，报单时上证所需要" />
+      <!-- 是否可以放在投资者信息表中？ -->
+      <Field name="SeatID" label="席位号" description="席位号" notnull="yes" />
+      <Field name="OptClientID" label="投资者账户子编码" description="期权子账号，股票期权填写为888" />
+      <Field name="IsActive" label="活跃状态" description="活跃状态" notnull="yes" />
+    </Entity>
+    <!-- OrderRouter账户体系 end -->
+
+    <!-- 报盘通道 start -->
+    <Entity name="TradeChannel" title="交易通道信息" description="交易通道信息" dbTable="yes" >
+      <!-- 系统报盘路径信息 -->
+      <Field name="ChannelID" label="通道编号" description="通道编号" iskey="yes"/>
+      <!--  -->
+      <Field name="ChannelName" label="通道名称" description="通道名称" />
+      <!--  -->
+      <Field name="ChannelType" label="通道类型" description="通道类型" />
+      <!--1 UFT分仓 2 CTP分仓 3 飞马分仓 -->
+      <Field name="SysIP" label="分仓接口IP" description="分仓接口IP"  />
+      <Field name="SysPort" label="分仓接口端口" description="分仓接口端口" />
+      <Field name="TradingDay" label="交易日" description="交易日" iskey="yes"/>
+    </Entity>
+    <!-- 报盘通道 end -->
+
+    <!-- OMS资金持仓 start -->
+    <Entity name="AccountAsset" title="账户资金信息" description="账户资金信息" dbTable="yes" >
+      <!-- 账户资金信息表  是否更名为AccountAsset -->
+      <Field name="TradingDay" label="交易日" description="交易日" iskey="yes"/>
+      <Field name="AccountID" label="账户编号" description="账户编号" iskey="yes" />
+      <Field name="CurrencyID" label="币种代码" description="币种代码" iskey="yes" />
+      <!-- 删除? -->
+      <Field name="PreDeposit" label="上次存款额" description="上次存款额" />
+      <Field name="PreMargin" label="上次保证金占用" description="上次保证金占用" />
+      <Field name="PreBalance" label="上次结算准备金" description="上次结算准备金" />
+      <Field name="Balance" label="结算准备金" description="结算准备金" />
+      <Field name="Deposit" label="今存款额" description="今存款额" />
+      <Field name="FrozenMargin" label="冻结保证金" description="冻结保证金" />
+      <Field name="FrozenCommission" label="冻结手续费" description="冻结手续费" />
+      <Field name="FrozenCash" label="冻结的资金" description="冻结的资金"/>
+      <Field name="ManualFrozenCash" label="手工冻结的资金" description="手工冻结的资金"/>
+      <!--手工冻结用于用户自定义调整系统可用的手段 资金可用算法： 可用=当前-冻结-手工冻结 -->
+	  <Field name="CheckCash" label="核对调整资金" description="核对调整资金"/>
+      <Field name="UseMargin" label="保证金占用" description="保证金占用" />
+      <Field name="Commission" label="手续费占用" description="手续费占用" />
+      <Field name="WithdrawQuota"  label="可取资金" description="可取资金"/>
+      <Field name="Credit"  label="保证金可用余额" description="保证金可用余额"/>
+      <Field name="Available" label="可用现金" description="可用现金"/>
+      <Field name="CloseProfit"  label="平仓盈亏" description="平仓盈亏"/>
+      <Field name="PositionProfit"  label="持仓盈亏" description="持仓盈亏"/>
+      <Field name="CashIn" label="入金金额" description="入金金额" />
+      <Field name="CashOut" label="出金金额"  description="出金金额" />
+      <Field name="IsDefault" label="缺省状态" description="缺省状态,是否为默认创建" notnull="yes" />
+    </Entity>
+
+    <Entity name="AccountPosition" title="账户持仓信息" description="账户持仓信息" dbTable="yes">
+      <!-- 账户持仓信息表  是否更名为AccountPosition -->
+      <Field name="AccountID" label="账户编号" description="账户编号" iskey="yes" />
+      <Field name="ExchangeID" label="交易所代码" description="交易所代码" iskey="yes" />
+      <Field name="InstrumentID"  label="合约代码" description="合约代码" iskey="yes" />
+      <Field name="CoveredFlag" label="备对标志" description="备对标志" iskey="yes" />
+      <Field name="PosiDirection" label="持仓方向" description="持仓多空方向" iskey="yes" />
+      <Field name="TradeCode" label="交易编码" description="交易编码" iskey="yes" />
+      <Field name="TradingCodeType" label="交易编码类型" description="交易编码类型，投机套保" iskey="yes" />
+      <Field name="TradingDay" label="交易日" description="交易日" iskey="yes" />
+      <Field name="YdPosition" label="上日持仓" description="上日持仓" />
+      <Field name="PreMargin" label="上日保证金占用" description="上日保证金占用" />
+      <Field name="TodayPosition" label="今日持仓" description="今日持仓" />
+      <Field name="TotalPosition" label="总持仓量" description="总持仓量" />
+      <Field name="UseMargin" label="保证金占用" description="保证金占用" />
+      <Field name="OpenVolume" label="开仓量" description="当日开仓量" />
+      <Field name="CloseVolume" label="平仓量" description="当日平仓量" />
+      <Field name="CloseYdVolume" label="平昨仓量" description="平昨仓量"/>
+      <Field name="SettlementPrice" label="结算价" description="结算价" />
+      <Field name="PreSettlementPrice" label="昨结算价" description="昨结算价" />
+      <Field name="Commission" label="手续费占用" description="手续费占用" />
+      <Field name="FrozenCommission" label="冻结手续费" description="冻结手续费" />
+      <Field name="FrozenMargin" label="保证金冻结" description="保证金冻结" />
+      <Field name="OpenCost" label="开仓成本"  description="开仓成本" />
+      <Field name="PositionCost" label="持仓成本" description="持仓成本" />
+      <Field name="CloseProfit" label="平仓盈亏" description="平仓盈亏" />
+      <Field name="PositionProfit" label="持仓盈亏" description="持仓盈亏" />
+      <Field name="OpenAmount" label="开仓金额" description="开仓金额"  />
+      <Field name="CloseAmount" label="平仓金额" description="平仓金额" />
+      <Field name="CloseYdAmount" label="平昨仓金额" description="平昨仓金额"/>
+      <Field name="LongFrozen"  label="多头冻结数量" description="多头冻结数量" />
+      <Field name="LongFrozenAmount"  label="多头冻结金额" description="多头冻结金额" />
+      <Field name="ShortFrozen" label="空头冻结数量" description="空头冻结数量" />
+      <Field name="ShortFrozenAmount" label="空头冻结金额" description="空头冻结金额" />
+	  <Field name="FrozenVolume"  label="冻结数量" description="冻结数量" />
+      <Field name="ManualFrozenVolume"  label="手工冻结数量" description="手工冻结数量" />
+      <!-- 持仓可用算法： 可用=当前-冻结-手工冻结 -->
+	  <Field name="CheckVolume"  label="核对调整数量" description="核对调整数量" />
+	  <Field name="EnableVolume"  label="可用数量" description="可用数量" />
+    </Entity>
+
+
+    <Entity name="ComboPosition" title="组合持仓信息" description="组合持仓信息" dbTable="yes" >
+      <!-- 组合持仓信息表  是否更名为ComboPosition -->
+      <Field name="AccountID" label="账户编号" description="账户编号" iskey="yes" />
+      <Field name="ExchangeID" label="交易所代码" description="交易所代码" iskey="yes" />
+      <Field name="ComboID" label="策略代码" description="策略代码" iskey="yes"/>
+      <Field name="InstrumentID"  label="合约代码" description="合约代码" iskey="yes" />
+      <Field name="CoveredFlag" label="备对标志" description="备对标志" iskey="yes" />
+      <Field name="PosiDirection" label="持仓方向" description="持仓多空方向" iskey="yes" />
+      <Field name="TradeCode" label="交易编码" description="交易编码" iskey="yes" />
+      <Field name="TradingCodeType" label="交易编码类型" description="交易编码类型，投机套保" iskey="yes" />
+      <Field name="TradingDay" label="交易日" description="交易日" iskey="yes" />
+      <Field name="YdPosition" label="上日持仓" description="上日持仓" />
+      <Field name="PreMargin" label="上日保证金占用" description="上日保证金占用" />
+      <Field name="TodayPosition" label="今日持仓" description="今日持仓" />
+      <Field name="TotalPosition" label="总持仓量" description="总持仓量" />
+      <Field name="UseMargin" label="保证金占用" description="保证金占用" />
+      <Field name="OpenVolume" label="开仓量" description="当日开仓量" />
+      <Field name="CloseVolume" label="平仓量" description="当日平仓量" />
+      <Field name="CloseYdVolume" label="平昨仓量" description="平昨仓量"/>
+      <Field name="SettlementPrice" label="结算价" description="结算价" />
+      <Field name="PreSettlementPrice" label="昨结算价" description="昨结算价" />
+      <Field name="Commission" label="手续费占用" description="手续费占用" />
+      <Field name="FrozenCommission" label="冻结手续费" description="冻结手续费" />
+      <Field name="FrozenMargin" label="保证金冻结" description="保证金冻结" />
+      <Field name="OpenCost" label="开仓成本"  description="开仓成本" />
+      <Field name="PositionCost" label="持仓成本" description="持仓成本" />
+      <Field name="CloseProfit" label="平仓盈亏" description="平仓盈亏" />
+      <Field name="PositionProfit" label="持仓盈亏" description="持仓盈亏" />
+      <Field name="OpenAmount" label="开仓金额" description="开仓金额"  />
+      <Field name="CloseAmount" label="平仓金额" description="平仓金额" />
+      <Field name="CloseYdAmount" label="平昨仓金额" description="平昨仓金额"/>
+      <Field name="LongFrozen"  label="多头冻结数量" description="多头冻结数量" />
+      <Field name="LongFrozenAmount"  label="多头冻结金额" description="多头冻结金额" />
+      <Field name="ShortFrozen" label="空头冻结数量" description="空头冻结数量" />
+      <Field name="ShortFrozenAmount" label="空头冻结金额" description="空头冻结金额" />
+	  <Field name="FrozenVolume"  label="冻结数量" description="冻结数量" />
+      <Field name="ManualFrozenVolume"  label="手工冻结数量" description="手工冻结数量" />
+      <!-- 持仓可用算法： 可用=当前-冻结-手工冻结 -->
+	  <Field name="CheckVolume"  label="核对调整数量" description="核对调整数量" />
+	  <Field name="EnableVolume"  label="可用数量" description="可用数量" />
+    </Entity>
+
+    <Entity name="AccountPositionDtl" title="账户持仓明细" description="账户持仓明细" dbTable="yes" >
+      <!-- 账户期货持仓明细表  更名为AccountPositionDtl -->
+      <Field name="AccountID" label="账户编号" description="账户编号" iskey="yes" />
+      <Field name="ExchangeID" label="交易所代码" description="交易所代码" iskey="yes" />
+      <Field name="ComboID" label="策略代码" description="策略代码" iskey="yes" />
+      <Field name="InstrumentID"  label="合约代码" description="合约代码" iskey="yes" />
+      <Field name="CoveredFlag" label="备对标志" description="备对标志" iskey="yes" />
+      <Field name="PosiDirection" label="持仓方向" description="持仓多空方向" iskey="yes" />
+      <Field name="OpenDate" label="开仓日期" description="开仓日期" iskey="yes" />
+      <Field name="TradeID" label="成交编号" description="成交编号" iskey="yes" />
+      <Field name="TradeCode" label="交易编码" description="交易编码" iskey="yes" />
+      <Field name="TradingCodeType" label="交易编码类型" description="交易编码类型，投机套保" iskey="yes" />
+      <Field name="TradingDay" label="交易日" description="交易日" iskey="yes"  />
+      <Field name="Volume" label="持仓量" description="持仓量" />
+      <Field name="SettlementPrice" label="结算价" description="结算价" />
+      <Field name="PreSettlementPrice" label="昨结算价" description="昨结算价" />
+      <Field name="OpenPrice" label="开仓价" description="开仓价" />
+      <Field name="Margin" label="保证金占用" description="投资者保证金占用（由交易系统场上计算）" />
+      <Field name="MarginRate" label="投资者保证金率" description="投资者保证金（由交易系统填充）" />
+      <Field name="CloseVolume" label="平仓量" description="平仓量（由交易系统场上填充）" />
+      <Field name="CloseAmount" label="平仓金额" description="平仓金额" />
+    </Entity>
+    <!-- OMS资金持仓 end -->
+
+    <Entity name="FeeSet" title="费用设置信息" description="费用设置信息" dbTable="yes" >
+      <!-- 系统费用设置表 -->
+      <Field name="CompanyID" label="公司编号" description="公司编号" iskey="yes" />
+      <!-- -1代表当前层次通用 -->
+      <Field name="AccountID" label="账户编号" description="账户编号" iskey="yes" />
+      <Field name="ExchangeID" label="交易所代码" description="交易所代码" iskey="yes" />
+      <Field name="InstrumentID"  label="合约代码" description="合约代码" iskey="yes" />
+      <Field name="ProductClass"  label="产品类型" description="产品类型"  iskey="yes" />
+      <Field name="ProductID"  label="产品代码" description="产品代码" iskey="yes"/>
+      <Field name="Direction" label="买卖方向" description="买卖方向" iskey="yes"/>
+      <Field name="OffsetFlag" label="开平标志" description="开平标志" iskey="yes"/>
+      <Field name="CoveredFlag" label="备对标志" description="备对标志" iskey="yes" />
+      <Field name="HedgeFlag" label="投机套保标志" description="投机套保标志"  iskey="yes"/>
+      <Field name="FeeType" label="费用类别" description="费用类别"  iskey="yes"/>
+      <!-- 1：交易费 2：印花税 3：过户费 4：佣金 5：经手费 6：证管费 7：其它费 a：结算费 b：交割费 c:
+委托申报费 d: 撤单申报费 -->
+      <Field name="BalanceRatio" label="费用按成交金额比例" description="费用按成交金额比例" />
+      <Field name="FaceValueRatio" label="费用按成交面值比例" description="费用按成交面值比例" />
+      <Field name="AmountRatio" label="费用按成交数量比例" description="费用按成交数量比例" />
+      <Field name="MaxFee" label="最高收费" description="最高收费" />
+      <Field name="MinFee" label="最低收费" description="最低收费" />
+      <Field name="CalculateType" label="费用计算模式" description="费用计算模式" />
+      <!-- 费用计算使用分笔还是合笔模式 1分笔 2合笔  一般日间交易费用都是分笔计算模式，日初根据费用设置将合笔计算模式的费用重新计算并更新资金数据 -->
+      <Field name="TradingDay" label="交易日" description="交易日" iskey="yes"/>
+    </Entity>
+
+    <Entity name="MarginRate" title="保证金率" description="保证金率" dbTable="yes" >
+      <!-- 系统期货、期权保证金比例表 -->
+      <Field name="TradingDay" label="交易日" description="交易日" iskey="yes"/>
+      <Field name="AccountID" label="账户编号" description="账户编号" iskey="yes" />
+      <Field name="InvestorRange" label="投资者范围" description="投资者范围" iskey="yes" />
+      <Field name="ExchangeID" label="交易所代码" description="交易所代码" iskey="yes" />
+      <Field name="InstrumentID"  label="合约代码" description="合约代码" iskey="yes" />
+      <Field name="CoveredFlag" label="备对标志" description="备对标志" iskey="yes" />
+      <Field name="HedgeFlag" label="投机套保标志" description="投机套保标志" iskey="yes" />
+      <Field name="OptionType" label="期权类型" description="期权类型，认购、认沽、其他" iskey="yes" />
+      <Field name="ProductClass"  label="产品类型" description="产品类型"  iskey="yes" />
+      <Field name="ProductID"  label="产品代码" description="产品代码" iskey="yes"/>
+      <Field name="LongMarginRatioByMoney" label="多头保证金率" description="多头保证金率"/>
+      <Field name="LongMarginRatioByVolume" label="多头保证金费(按手数)" description="多头保证金费(按手数)"/>
+      <Field name="ShortMarginRatioByMoney" label="空头保证金率" description="空头保证金率"/>
+      <Field name="ShortMarginRatioByVolume" label="空头保证金费(按手数)" description="空头保证金费(按手数)"/>
+      <Field name="IsFloat" label="是否按比例上浮" description="按比例表示在交易所收取的基础上上调，否则按设置比例收取" />
+    </Entity>
+
+    <!-- OMS委托成交 start -->
+    <Entity name="Order" title="报单" description="报单" dbTable="yes">
+      <!-- 系统委托表  -->
+      <Field name="TradingDay" label="交易日" description="交易日"  iskey="yes"/>
+      <Field name="AccountID" label="账户编号" description="账户编号" iskey="yes" />
+      <Field name="ComboID" label="策略代码" description="策略代码"/>
+      <Field name="SessionID" label="会话编号" description="会话编号" />
+      <Field name="FrontID" label="前置编号" description="前置编号" />
+      <Field name="OrderRef" label="自定义编号" description="自定义编号"  />
+      <!-- 用户自定义订单编号  -->
+      <!-- 用户自定义订单编号  -->
+      <Field name="ExchangeID"  label="交易所代码" description="交易所代码" iskey="yes" />
+      <Field name="SeatID"  label="席位号" description="席位号" iskey="yes" />
+      <Field name="OrderLocalID" label="委托编号" description="委托编号" iskey="yes" />
+      <!-- 系统生成内部订单编号  -->
+      <!-- 系统生成内部订单编号  -->
+      <Field name="Direction" label="买卖方向" description="买卖方向" />
+      <Field name="OperatorID" label="操作员编号" description="操作员编号" />
+      <Field name="TradeCode"  label="交易编码" description="交易编码"/>
+      <Field name="BranchID"  label="营业部代码" description="营业部代码"/>
+      <Field name="InstrumentID"  label="合约代码" description="合约代码"/>
+      <Field name="OrderPriceType" label="报单价格条件" description="报单价格条件"/>
+      <Field name="CombOffsetFlag" label="组合开平标志" description="组合开平标志"/>
+      <Field name="CombHedgeFlag" label="组合投机套保标志" description="组合投机套保标志"/>
+      <Field name="CoveredFlag"  label="备兑标志" description="备兑标志"/>
+      <Field name="LimitPrice" label="价格" description="价格"/>
+      <Field name="VolumeTotalOriginal" label="数量" description="数量"/>
+      <Field name="TimeCondition" label="有效期类型" description="有效期类型"/>
+      <Field name="VolumeCondition" label="成交量类型" description="成交量类型"/>
+      <Field name="MinVolume" label="最小成交量" description="最小成交量"/>
+      <Field name="ContingentCondition" label="触发条件" description="触发条件"/>
+      <Field name="StopPrice" label="止损价" description="止损价"/>
+      <Field name="ORRequestID" label="OR委托编号" description="OR委托编号"/>
+      <Field name="OrderSysID" label="柜台委托编号" description="柜台委托编号"/>
+      <!-- 分仓柜台 柜台系统返回的订单编号 如果委托为撤单委托，建议这个字段存放原委托的RequestID 用于报盘进行撤单申报  -->
+      <!-- 分仓柜台 柜台系统返回的订单编号 如果委托为撤单委托，建议这个字段存放原委托的RequestID 用于报盘进行撤单申报  -->
+ 
+      <!-- 交易所返回的订单申报编号,对接分仓柜台，则为分仓柜台编号  -->
+      <Field name="OrderStatus" label="报单状态" description="报单状态"/>
+      <Field name="OrderType" label="报单类型" description="报单类型"/>
+      <Field name="VolumeTraded" label="今成交数量" description="今成交数量"/>
+      <Field name="AmountTraded" label="今成交金额" description="今成交金额"/>
+      <Field name="VolumeRemain" label="剩余数量" description="剩余数量"/>
+      <Field name="InsertDate" label="报单日期" description="报单日期"/>
+      <Field name="InsertTime" label="委托时间" description="委托时间"/>
+      <Field name="UpdateTime" label="最后修改时间" description="最后修改时间"/>
+      <Field name="CancelTime" label="撤销时间" description="撤销时间"/>
+      <Field name="OrderActionRef" label="撤单编号" description="撤单编号"/>
+      <!-- 撤单的原订单编号  -->
+      <!-- 撤单的原订单编号  -->
+      <Field name="StatusMsg" label="状态信息" description="状态信息"/>
+      <Field name="OwnerType"  label="发起标志" description="发起标志, 上证所接口类型"/>
+      <Field name="ThirdReff1" label="预留字段1" description="预留字段1" />
+      <Field name="ThirdReff2" label="预留字段2" description="预留字段2" />
+      <Field name="VolumeCanceled" label="撤成\废单数量" description="撤成\废单数量"/>
+      <!-- 撤成或者废单数量  -->
+      <Field name="Remark" label="备注" description="备注"/>
+      <!-- 可以存放废单原因等订单备注信息  -->
+      <Field name="CancelFlag" label="撤单标志" description="撤单标志"/>
+      <!-- 1 普通委托 2 撤单委托  -->
+	  <Field name="OrderIP" label="订单IP" description="订单IP"/>
+	  <Field name="OrderMAC" label="订单MAC" description="订单MAC"/>
+	  <Field name="OrderHDNum" label="订单硬盘序列号" description="订单硬盘序列号"/>
+	  <Field name="OrderMacCode" label="订单机器码" description="订单机器码"/>
+	  <Field name="OrderOS" label="订单操作系统" description="订单操作系统"/>
+	  <Field name="Balance" label="委托金额" description="委托金额"/>
+	  <Field name="Commission" label="委托费用" description="委托费用"/>
+    </Entity>
+
+    <Entity name="Trade" title="成交" description="成交" dbTable="yes">
+      <!-- 系统成交表  -->
+      <Field name="TradingDay" label="交易日" description="交易日" iskey="yes" />
+      <Field name="AccountID" label="账户编号" description="账户编号" iskey="yes" />
+      <Field name="ComboID" label="组合代码" description="组合代码"/>
+      <Field name="ExchangeID"  label="交易所代码" description="交易所代码" iskey="yes" />
+      <Field name="TradeID" label="成交编号" description="成交编号" iskey="yes" />
+      <!-- 交易所\分仓柜台返回的成交编号  -->
+      <Field name="Direction" label="买卖方向" description="买卖方向" iskey="yes"/>
+      <Field name="TradeCode"  label="交易编码" description="交易编码"/>
+      <Field name="SeatID"  label="席位号" description="席位号"/>
+      <Field name="BranchID"  label="营业部代码" description="营业部代码"/>
+      <Field name="InstrumentCode"  label="合约编码" description="合约编码"/>
+      <Field name="InstrumentID"  label="合约代码" description="合约代码"/>
+      <Field name="OperatorID" label="操作员编号" description="操作员编号" />
+      <Field name="ORRequestID" label="请求编号" description="请求编号"/>
+      <Field name="OrderSysID" label="报单编号" description="报单编号"/>
+      <Field name="OrderLocalID" label="本地报单编号" description="本地报单编号"/>
+      <Field name="OrderRef" label="报单引用" description="报单引用"/>
+      <Field name="OffsetFlag" label="开平标志" description="开平标志"/>
+      <Field name="CoveredFlag"  label="备兑标志" description="备兑标志"/>
+      <Field name="HedgeFlag" label="投机套保标志" description="投机套保标志"/>
+      <Field name="Price" label="成交价格" description="成交价格"/>
+      <Field name="Volume" label="成交量" description="成交量"/>
+      <Field name="TradeAmount" label="成交金额" description="成交金额"/>
+      <Field name="TradeDate" label="成交时期" description="成交时期"/>
+      <Field name="TradeTime" label="成交时间" description="成交时间"/>
+      <Field name="Commission" label="手续费" description="手续费"/>
+      <Field name="SequenceNo" label="序号" description="序号"/>
+      <!-- 系统自己生成的成交记录编号  -->
+      <Field name="OwnerType"  label="发起标志" description="发起标志,上证所接口类型"/>
+    </Entity>
+    <!-- OMS委托成交 end -->
+
+    <Entity name="RiskRule" title="风控规则" description="风控规则" dbTable="yes" >
+      <Field name="TradingDay" label="交易日" description="交易日" iskey="yes" />
+      <Field name="RiskId" label="规则ID" description="规则ID" iskey="yes" />
+      <Field name="RuleCode" label="规则代码" description="规则代码"  />
+      <Field name="ExchangeID" label="交易所代码" description="交易所代码"  />
+      <Field name="InstrumentIDs" label="合约代码集合" description="合约代码集合，以英文逗号隔开" />
+      <Field name="InstrumentRange" label="合约范围" description="合约范围: 单一合约、产品类型、所有" />
+      <Field name="InstrumentControlFlag" label="合约联合风控" description="合约联合风控 如果为true则配置的InstrumentIDs联合检查， 否则检查单个（所谓单个是指当前OrderReq所属的Instrument or ProductClass）" />
+      <Field name="InvestorIDs" label="投资者代码集合" description="投资者代码集合，以英文逗号隔开" />
+      <Field name="InvestorRange" label="投资者范围" description="投资者范围"  />
+      <Field name="InvestorControlFlag" label="投资账户联合风控" description="投资账户联合风控 如果为true 则配置的InvestorIDs 联合检查，否则检查单个（所谓单个是指当前OrderReq所属的Investor or Group ）"  />
+      <Field name="RuleName" label="规则名称" description="规则名称" />
+      <Field name="IsActive" label="是否启用" description="是否启用" />
+      <Field name="Value" label="内容明细（json字符串）" description="内容明细（json字符串）" />
+    </Entity>
+
+    <Entity name="RiskRuleLog" title="触发风控规则日志" description="触发风控规则日志" dbTable="yes" >
+      <Field name="TradingDay" label="交易日" description="交易日" iskey="yes" />
+      <Field name="SequenceNo" label="序号" description="序号" iskey="yes"/>
+      <Field name="ExecuteTime"   label="执行时间" description="执行时间"/>
+      <Field name="RiskId" label="规则ID" description="规则ID"/>
+      <Field name="RuleCode" label="规则代码" description="规则代码"  />
+      <Field name="RuleName" label="规则名称" description="规则名称" />
+      <Field name="ExchangeID" label="交易所代码" description="交易所代码"  />
+      <Field name="InstrumentIDs" label="合约代码集合" description="合约代码集合，以英文逗号隔开" />
+      <Field name="AccountID" label="账户编号" description="账户编号" />
+      <Field name="OrderRef"  label="报单引用" description="报单引用"/>
+      <Field name="Threshold"  label="规则阀值" description="规则阀值"/>
+      <Field name="CalcValue"  label="计算指标值" description="计算指标值"/>
+      <Field name="ErrorMsg" label="错误信息" description="错误信息"/>
+    </Entity>
+
+    <Entity name="AdminCommand" title="管理员指令" description="管理员指令" dbTable="yes" >
+      <Field name="TradingDay" label="交易日" description="交易日" iskey="yes"/>
+      <Field name="SequenceNo" label="序号" description="序号" iskey="yes" />
+      <Field name="OperatorID"  label="操作员ID" description="操作员ID"/>
+      <Field name="Password"   label="密码" description="密码"/>
+      <Field name="AccountID"  label="被操作的账户ID" description="被操作的账户ID"/>
+      <Field name="AdminCode" label="指令代码" description="指令代码"/>
+      <Field name="Value" label="修改内容明细（json字符串）" description="修改内容明细（json字符串）" />
+      <Field name="ErrorID" label="错误代码" description="错误代码"/>
+      <Field name="ErrorMsg" label="错误信息" description="错误信息"/>
+    </Entity>
+
+    <Entity name="OperationLog" title="指令日志" description="指令日志" dbTable="yes" >
+      <Field name="TradingDay" label="交易日" description="交易日"/>
+      <Field name="OperatorID" label="操作员编号" description="操作员编号"/>
+      <Field name="InvestorID" label="投资者代码" description="投资者代码"/>
+      <Field name="ExecuteTime"   label="执行时间" description="执行时间"/>
+      <Field name="AdminCode" label="指令代码" description="指令代码"/>
+      <Field name="Value" label="修改内容明细（json字符串）" description="修改内容明细（json字符串）" />
+      <Field name="ErrorID" label="错误代码" description="错误代码"/>
+      <Field name="ErrorMsg" label="错误信息" description="错误信息"/>
+    </Entity>
+
+    <Entity name="RspInfo" title="返回信息" description="返回信息">
+      <Field name="ErrorID" label="错误代码" description="错误代码" iskey="yes"/>
+      <Field name="IsLast"  label="结束标志" description="结束标志"/>
+      <Field name="ErrorMsg" label="错误信息" description="错误信息"/>
+    </Entity>
+
+    <Entity name="LoginReq" title="登录请求" description="登录请求">
+      <Field name="OperatorID" label="操作员编号" description="操作员编号" />
+      <Field name="Password"   label="密码" description="密码"/>
+      <Field name="OrderIP" label="订单IP" description="订单IP"/>
+      <Field name="OrderMAC" label="订单MAC" description="订单MAC"/>
+      <Field name="OrderHDNum" label="订单硬盘序列号" description="订单硬盘序列号"/>
+      <Field name="OrderMacCode" label="订单机器码" description="订单机器码"/>
+      <Field name="OrderOS" label="订单操作系统" description="订单操作系统"/>
+    </Entity>
+
+    <Entity name="LogoutReq" title="注销请求" description="注销请求">
+      <Field name="OperatorID" label="操作员编号" description="操作员编号" />
+    </Entity>
+
+    <Entity name="RspLogin" title="登入请求响应" description="登入请求响应">
+      <Field name="TradingDay"   label="交易日" description="交易日"/>
+      <Field name="LoginTime"   label="登录成功时间" description="登录成功时间"/>
+      <Field name="OperatorID" label="操作员编号" description="操作员编号" />
+      <Field name="FrontID"  label="前置编号" description="前置编号"/>
+      <Field name="SessionID"  label="会话编号" description="会话编号"/>
+      <Field name="MaxOrderRef"  label="报单引用" description="报单引用"/>
+    </Entity>
+
+    <Entity name="OrderReq" title="报单录入请求" description="报单录入请求">
+      <Field name="AccountID"  label="账户代码" description="账户代码"/>
+      <Field name="OperatorID" label="操作员编号" description="操作员编号" />
+      <Field name="ComboID" label="组合代码" description="组合代码"/>
+      <!-- 暂时不需要席位号， 轮询到飞马的席位号
+      <Field name="SeatID" label="席位号" description="席位号" notnull="yes" />
+      -->
+      <Field name="InstrumentID"   label="合约代码" description="合约代码"/>
+      <Field name="OrderRef"  label="报单引用" description="报单引用"/>
+      <Field name="ExchangeID"   label="交易所代码" description="交易所代码"/>
+      <Field name="OrderPriceType"  label="报单价格条件" description="报单价格条件"/>
+      <Field name="Direction"  label="买卖方向" description="买卖方向"/>
+      <Field name="CombOffsetFlag"  label="组合开平标志" description="组合开平标志"/>
+      <Field name="CombHedgeFlag"  label="组合投机套保标志" description="组合投机套保标志"/>
+      <Field name="CoveredFlag"  label="备兑标志" description="备兑标志"/>
+      <Field name="LimitPrice"  label="价格" description="价格"/>
+      <Field name="VolumeTotalOriginal"  label="数量" description="数量"/>
+      <Field name="TimeCondition" label="有效期类型" description="有效期类型"/>
+      <Field name="VolumeCondition" label="成交量类型" description="成交量类型"/>
+      <Field name="MinVolume" label="最小成交量" description="最小成交量"/>
+      <Field name="ContingentCondition" label="触发条件" description="触发条件"/>
+      <Field name="StopPrice" label="止损价" description="止损价"/>
+      <Field name="ThirdReff1" label="预留字段1" description="预留字段1" />
+      <Field name="ThirdReff2" label="预留字段2" description="预留字段2" />
+    </Entity>
+
+    <Entity name="OrderCancelReq" title="取消报单请求" description="取消报单请求">
+      <Field name="AccountID"  label="账户代码" description="账户代码"/>
+      <Field name="OperatorID" label="操作员编号" description="操作员编号" />
+      <Field name="InstrumentID"   label="合约代码" description="合约代码"/>
+      <Field name="OrderActionRef" label="报单操作引用" description="报单操作引用"/>
+      <Field name="OrderRef"  label="需要撤单的报单引用" description="需要撤单的报单引用"/>
+      <Field name="FrontID"  label="前置编号" description="前置编号" />
+      <Field name="SessionID"  label="会话编号" description="会话编号" />
+      <Field name="ExchangeID"   label="交易所代码" description="交易所代码"/>
+      <Field name="OrderSysID" label="报单编号" description="报单编号"/>
+    </Entity>
+
+    <Entity name="QryRiskRule" title="查询风控请求" description="查询风控请求" >
+      <Field name="RiskId" label="规则ID" description="规则ID" />
+      <Field name="RuleCode" label="规则代码" description="规则代码"/>
+    </Entity>
+
+    <!-- qry entity defines-->
+    <Entity name="QryInstrument" title="查询产品信息" description="查询产品信息">
+      <Field name="ExchangeID"   label="交易所代码" description="交易所代码"/>
+      <Field name="InstrumentID"   label="合约代码" description="合约代码"/>
+    </Entity>
+
+    <Entity name="QryCommissionRate" title="查询产品手续费信息" description="查询产品手续费信息">
+      <Field name="AccountID" label="投资者代码" description="投资者代码" />
+      <Field name="ExchangeID"   label="交易所代码" description="交易所代码"/>
+      <Field name="InstrumentID"   label="合约代码" description="合约代码"/>
+      <Field name="Direction"  label="买卖方向" description="买卖方向"/>
+      <Field name="OffsetFlag" label="开平标志" description="开平标志"/>
+      <Field name="CoveredFlag"  label="备兑标志" description="备兑标志"/>
+      <Field name="HedgeFlag" label="投机套保标志" description="投机套保标志"/>
+    </Entity>
+
+    <Entity name="QryMarginRate" title="查询产品保证金率信息" description="查询产品产品保证金率信息">
+      <Field name="AccountID" label="投资者代码" description="投资者代码" />
+      <Field name="ExchangeID"   label="交易所代码" description="交易所代码"/>
+      <Field name="InstrumentID"   label="合约代码" description="合约代码"/>
+      <Field name="Direction"  label="买卖方向" description="买卖方向"/>
+      <Field name="OffsetFlag" label="开平标志" description="开平标志"/>
+      <Field name="CoveredFlag"  label="备兑标志" description="备兑标志"/>
+      <Field name="HedgeFlag" label="投机套保标志" description="投机套保标志"/>
+    </Entity>
+
+    <Entity name="QryOrder" title="查询报单" description="查询报单">
+      <Field name="AccountID" label="投资者代码" description="投资者代码" />
+      <Field name="ComboID" label="组合代码" description="组合代码"/>
+      <Field name="ExchangeID"   label="交易所代码" description="交易所代码"/>
+      <Field name="InstrumentID"   label="合约代码" description="合约代码"/>
+      <Field name="OrderSysID" label="报单编号" description="报单编号"/>
+    </Entity>
+
+    <Entity name="QryTrade" title="查询成交" description="查询成交">
+      <Field name="AccountID" label="投资者代码" description="投资者代码" />
+      <Field name="ComboID" label="组合代码" description="组合代码"/>
+      <Field name="ExchangeID"   label="交易所代码" description="交易所代码"/>
+      <Field name="InstrumentID"   label="合约代码" description="合约代码"/>
+      <Field name="TradeID"  label="成交编号" description="成交编号" />
+    </Entity>
+
+    <Entity name="QryAccount" title="查询资金账户" description="查询资金账户">
+      <Field name="AccountID" label="投资者代码" description="投资者代码" />
+    </Entity>
+
+    <Entity name="QryPosition" title="查询投资者持仓" description="查询投资者持仓">
+      <Field name="AccountID" label="投资者代码" description="投资者代码" />
+      <Field name="ComboID" label="组合代码" description="组合代码"/>
+      <Field name="ExchangeID"   label="交易所代码" description="交易所代码"/>
+      <Field name="InstrumentID"  label="合约代码" description="合约代码"/>
+    </Entity>
+
+    <Entity name="QryCombo" title="查询投资组合" description="查询投资组合">
+      <Field name="AccountID" label="投资者代码" description="投资者代码" />
+      <Field name="ComboID" label="组合代码" description="组合代码"/>
+    </Entity>
+
+    <!-- end of qry entity-->
+
+
+
+  </Entities>
+
+  <Fields>
+    <Field name="InstrumentID" type="String" length="30"  label="合约代码" description="合约代码"/>
+    <Field name="ExchangeID" type="String" length="8"  label="交易所代码" description="交易所代码"/>
+    <Field name="InstrumentName" type="String" length="20"  label="合约名称" description="合约名称"/>
+    <Field name="ProductID" type="String" length="30"   label="产品代码" description="产品代码"/>
+    <Field name="ProductClass" type="EnumChar"  label="产品类型" description="产品类型" prefix="PC">
+      <enum value="1" name="Futures" label='期货' />
+      <enum value="2" name="Options" label='期权' />
+      <enum value="3" name="Stock" label='股票' />
+      <enum value="4" name="Bond" label='债券' />
+      <enum value="5" name="Fund" label='基金' />
+      <enum value="6" name="Index" label='指数' />
+      <enum value="7" name="Warrant" label='权证' />
+      <enum value="8" name="Repo" label='回购' />
+      <enum value="9" name="Other" label='其他' />
+    </Field>
+    <Field name="VolumeMultiple" type="Int"  label="合约数量乘数" description="合约数量乘数"/>
+    <Field name="PriceTick" type="Double"  label="最小变动价位" description="最小变动价位"/>
+    <Field name="OpenDate" type="Int"  label="上市日" description="上市日"/>
+    <Field name="ExpireDate" type="Int"  label="到期日" description="到期日"/>
+    <Field name="IsTrading" type="Int"  label="当前是否交易" description="当前是否交易"/>
+    <Field name="ExecPrice" type="Double"  label="期权执行价格" description="期权执行价格"/>
+    <Field name="LastPrice" type="Double"  label="最新价" description="最新价"/>
+    <Field name="UnitMargin" type="Double"  label="期权单手保证金" description="期权单手保证金"/>
+    <Field name="InvestorRange" type="EnumChar"  label="投资者范围" description="投资者范围" prefix="IR">
+      <enum name="All" value="1" label="所有"/>
+      <enum name="Group" value="2" label="投资者组"/>
+      <enum name="Single" value="3" label="单一投资者"/>
+      <enum name="AllInvestUnit" value="4" label="所有投资单元"/>
+      <enum name="SingleInvestUnit" value="5" label="单一投资单元"/>
+    </Field>
+    <Field name="BrokerID" type="String" length="10"  label="经纪公司代码" description="经纪公司代码"/>
+    <Field name="ProviderID" type="String" length="10"  label="柜台代码" description="柜台代码"/>
+    <Field name="ProviderType"  type="EnumChar" label="柜台类型" description="柜台类型（CTPTD、CTPMD、LTSQRY)等" prefix="PT">
+      <enum name="CtpFutureTd" value="0" label="ctp期货交易"/>
+      <enum name="CtpFutureMd" value="1" label="ctp期货行情"/>
+      <enum name="CtpFutureQry" value="2" label="ctp期货查询"/>
+      <enum name="STPOptionTd" value="3" label="Stp的期权交易"/>
+      <enum name="STPOptionQry" value="4" label="Stp的期权查询"/>
+      <enum name="STPStockTd" value="5" label="Stp的股票交易"/>
+      <enum name="STPStockQry" value="6" label="Stp的股票查询"/>
+      <enum name="FemasFutureTd" value="7" label="Femas期货交易"/>
+      <enum name="FemasFutureMd" value="8" label="Femas期货行情"/>
+      <enum name="FemasFutureQry" value="9" label="Femas期货查询"/>
+    </Field>
+    <Field name="BrokerInvestorID" type="String" length="32"  label="母账户代码" description="母账户代码"/>
+    <Field name="Direction" type="EnumChar"  label="买卖方向" description="买卖方向" prefix="D">
+      <enum name="Buy" value="0" label="买"/>
+      <enum name="Sell" value="1" label="卖"/>
+      <enum name="ETFPur" value="2" label="ETF申购"/>
+      <enum name="ETFRed" value="3" label="ETF赎回"/>
+      <enum name="CashIn" value="4" label="现金替代，只用作回报"/>
+      <enum name="PledgeBondIn" value="5" label="债券入库"/>
+      <enum name="PledgeBondOut" value="6" label="债券出库"/>
+      <enum name="Doublened" value="7" label="配股"/>
+      <enum name="DepositoryTransfer" value="8" label="转托管"/>
+      <enum name="CreditDoublened" value="9" label="信用账户配股"/>
+      <enum name="BuyCollateral" value="A" label="担保品买入"/>
+      <enum name="SellCollateral" value="B" label="担保品卖出"/>
+      <enum name="CollateralTransferIn" value="C" label="担保品转入"/>
+      <enum name="CollateralTransferOut" value="D" label="担保品转出"/>
+      <enum name="MarginTrade" value="E" label="融资买入"/>
+      <enum name="ShortSell" value="F" label="融券卖出"/>
+      <enum name="RepayMargin" value="G" label="卖券还款"/>
+      <enum name="RepayStock" value="H" label="买券还券"/>
+      <enum name="DirectRepayMargin" value="I" label="直接还款"/>
+      <enum name="DirectRepayStock" value="J" label="直接还券"/>
+      <enum name="ExcessStockTransfer" value="K" label="余券划转"/>
+      <enum name="OFPur" value="L" label="OF申购"/>
+      <enum name="OFRed" value="M" label="OF赎回"/>
+      <enum name="SFSplit" value="N" label="SF拆分"/>
+      <enum name="SFMerge" value="O" label="SF合并"/>
+      <enum name="Covered" value="P" label="备兑"/>
+      <enum name="Freeze" value="Q" label="证券冻结(开)/解冻(平)"/>
+      <enum name="Execute" value="R" label="行权"/>
+      <enum name="CBRed" value="S" label="CB回售"/>
+      <enum name="CBConv" value="T" label="CB转股"/>
+      <enum name="OFSub" value="U" label="OF认购"/>
+    </Field>
+    <Field name="StampTaxRateByMoney" type="Double" label="印花税率" description="印花税率"/>
+    <Field name="StampTaxRateByVolume" type="Double" label="印花税率(按手数)" description="印花税率(按手数)"/>
+    <Field name="TransferFeeRateByMoney" type="Double" label="过户费率" description="过户费率"/>
+    <Field name="TransferFeeRateByVolume" type="Double" label="过户费率(按手数)" description="过户费率(按手数)"/>
+    <Field name="HandlingFeeByMoney" type="Double" label="经手费率" description="经手费率"/>
+    <Field name="HandlingFeeByVolume" type="Double" label="经手费率(按手数)" description="经手费率(按手数)"/>
+    <Field name="AdminFeeByMoney" type="Double" label="证管费率" description="证管费率"/>
+    <Field name="AdminFeeByVolume" type="Double" label="证管费率(按手数)" description="证管费率(按手数)"/>
+    <Field name="TradeFeeByMoney" type="Double" label="交易费率" description="交易费率"/>
+    <Field name="TradeFeeByVolume" type="Double" label="交易费率(按手数)" description="交易费率(按手数)"/>
+    <Field name="ClearingFeeByMoney" type="Double"  label="结算费率" description="结算费率"/>
+    <Field name="ClearingFeeByVolume" type="Double"  label="结算费率(按手数)" description="结算费率(按手数)"/>
+    <Field name="OtherFeeByVolume" type="Double" label="其他费用" description="其他费用"/>
+    <Field name="OtherFeeByMoney" type="Double" label="其他费用（按手数）" description="其他费用（按手数）"/>
+
+    <Field name="CommissionRatioByMoney" type="Double"  label="手续费率" description="手续费率"/>
+    <Field name="CommissionRatioByVolume" type="Double"  label="手续费(按手数)" description="手续费(按手数)"/>
+    <Field name="PerOrderAmtRatio" type="Double" label="每笔委托申报费" description="每笔委托申报费"/>
+    <Field name="PerCancelAmtRatio" type="Double" label="每笔撤单申报费" description="每笔撤单申报费"/>
+    <Field name="HedgeFlag" type="EnumChar"  label="投机套保标志" description="投机套保标志" prefix="HF">
+      <enum name="Speculation" value="1" label="投机"/>
+      <enum name="Arbitrage" value="2" label="套利"/>
+      <enum name="Hedge" value="3" label="套保"/>
+      <enum name="MarketMaker" value="4" label="做市商"/>
+    </Field>
+    <Field name="MarginRatioByMoney" type="Double"  label="保证金率" description="保证金率"/>
+    <Field name="MarginRatioByVolume" type="Double"  label="保证金费" description="保证金费"/>
+    <Field name="LongMarginRatioByMoney" type="Double"  label="多头保证金率" description="多头保证金率"/>
+    <Field name="LongMarginRatioByVolume" type="Double"  label="多头保证金费" description="多头保证金费"/>
+    <Field name="ShortMarginRatioByMoney" type="Double"  label="空头保证金率" description="空头保证金率"/>
+    <Field name="ShortMarginRatioByVolume" type="Double"  label="空头保证金费" description="空头保证金费"/>
+    <Field name="IsRelative" type="Int"  label="是否相对交易所收取" description="是否相对交易所收取"/>
+    <Field name="BrokerInvestorName" type="String" length="80"  label="母账户名称" description="母账户名称"/>
+    <Field name="Password" type="String" length="40"  label="密码" description="密码"/>
+    <Field name="UserType" type="EnumChar"  label="用户类型" description="用户类型" prefix="UT">
+      <enum name="Investor" value="0" label="投资者"/>
+      <enum name="Operator" value="1" label="操作员"/>
+      <enum name="SuperUser" value="2" label="管理员"/>
+    </Field>
+    <Field name="IsActive" type="Int"  label="是否活跃" description="是否活跃"/>
+    <Field name="InvestorID" type="Int" label="投资者代码" description="投资者代码"/>
+
+    <Field name="OptSubInvestorID" type="String" length="8" label="期权子账户编码" description="期权子账户编码"/>
+    <Field name="BusinessUnit"  type="String" length="5" label="席位号" description="席位号"/>
+    <Field name="BranchID" type="String" length="5" label="营业部代码" description="营业部代码"/>
+    <Field name="CoveredFlag" type="EnumChar" label="备兑标志" description="备兑标志" prefix="CF">
+      <enum name="Uncovered" value="0" label="非备兑"/>
+      <enum name="Covered" value="1" label="备兑"/>
+    </Field>
+    <Field name="OwnerType" type="EnumChar" label="发起标志" description="发起标志" prefix="OT">
+      <enum name="0" value="0" label="个人投资者"/>
+      <enum name="1" value="1" label="交易所发起"/>
+      <enum name="2" value="2" label="期权经营机构"/>
+      <enum name="3" value="3" label="机构投资者发起"/>
+      <enum name="4" value="4" label="自营交易发起"/>
+      <enum name="5" value="5" label="流动性服务提供商发起"/>
+    </Field>
+    <Field name="InvestorName" type="String" length="80"  label="投资者名称" description="投资者名称"/>
+    <Field name="InvestorLevel" type="EnumChar"  label="投资者交易等级" description="投资者交易等级" prefix="IL">
+      <enum name="1" value="0" label="一级"/>
+      <enum name="2" value="1" label="二级"/>
+      <enum name="3" value="2" label="三级"/>
+      <enum name="9" value="9" label="非交易级别，此级别investor不可交易"/>
+    </Field>
+    <Field name="UserID" type="String" length="14"  label="用户代码" description="用户代码"/>
+    <Field name="GatewayUserID"  type="String" length="14" label="网关登录用户代码" description="网关登录用户代码"/>
+    <Field name="UserName" type="String" length="80"  label="用户名称" description="用户名称"/>
+    <Field name="ComboID" type="Int"  label="策略代码" description="策略代码"/>
+    <Field name="ComboName" type="String" length="80"  label="策略名称" description="策略名称"/>
+    <Field name="AssetNo" type="String" length="16"  label="资产单元编号（UFX Only）" description="资产单元编号（UFX Only）"/>
+    <Field name="PositionLimit" type="Double"  label="持仓限制" description="持仓限制"/>
+    <Field name="CreditLimit" type="Double"  label="资金限制" description="资金限制"/>
+    <Field name="Memo" type="String" length="80"  label="备注" description="备注"/>
+    <Field name="TradeID" type="String" length="20"  label="成交编号" description="成交编号"/>
+    <Field name="OrderSysID" type="String" length="16"  label="报单编号" description="报单编号"/>
+    <Field name="OrderLocalID" type="String" length="12"  label="本地报单编号" description="本地报单编号"/>
+    <!--在gateway trade转换中会借用该字段， 填写真实的gateway ref ， 因此字段增长到50-->
+    <Field name="OrderRef" type="String" length="50" label="报单引用" description="报单引用"/>
+    <Field name="MaxOrderRef" type="Int" label="最大报单引用" description="最大报单引用"/>
+    <Field name="OrderCancelRef" type="String" length="10" label="取消报单引用" description="取消报单引用"/>
+    <Field name="BrokerOrderSeq" type="Int" label="经纪公司报单编号" description="经纪公司报单编号"/>
+    <Field name="ThirdReff" type="Int" label="第三方编号（如果柜台支持，采用的柜台的自定义字段）" description="第三方编号（如果柜台支持，采用的柜台的自定义字段）"/>
+    <Field name="OffsetFlag" type="EnumChar"  label="开平标志" description="开平标志" prefix="OF">
+      <enum name="Open" value="0" label="开仓"/>
+      <enum name="Close" value="1" label="平仓"/>
+      <enum name="ForceClose" value="2" label="强平"/>
+      <enum name="CloseToday" value="3" label="平今"/>
+      <enum name="CloseYesterday" value="4" label="平昨"/>
+      <enum name="ForceOff" value="5" label="强减"/>
+      <enum name="LocalForceClose" value="6" label="本地强平"/>
+      <enum name="Auto" value="7" label="自动进行平昨平今判断(暂不支持）"/>
+      <enum name="Call" value="8" label="认购" />
+      <enum name="Put" value="9" label="认沽" />
+    </Field>
+    <Field name="Price" type="Double"  label="价格" description="价格"/>
+    <Field name="Volume" type="Int"  label="成交量" description="成交量"/>
+    <Field name="TradeAmount" type="Double"  label="成交金额" description="成交金额"/>
+    <Field name="TradeDate" type="Int"  label="成交时期" description="成交时期"/>
+    <Field name="TradeTime" type="Int"  label="成交时间" description="成交时间"/>
+    <Field name="LoginTime" type="Int" label="登录成功时间" description="登录成功时间"/>
+    <Field name="ExecuteTime" type="Int"  label="登录成功时间" description="登录成功时间"/>
+    <Field name="BranchPBU" type="String" length="20"  label="交易所交易员代码" description="交易所交易员代码"/>
+    <Field name="SequenceNo" type="Int"  label="序号" description="序号"/>
+    <Field name="TradingDay" type="Int"  label="交易日" description="交易日"/>
+    <Field name="AccountCode" type="String" length="30" label="资金账户代码" description="资金账号代码"/>
+    <Field name="OrderPriceType" type="EnumChar"  label="报单价格条件" description="报单价格条件"  prefix="OPT">
+      <enum name="AnyPrice" value="1" label="任意价"/>
+      <enum name="LimitPrice" value="2" label="限价"/>
+      <enum name="BestPrice" value="3" label="最优价"/>
+      <enum name="LastPrice" value="4" label="最新价"/>
+      <enum name="LocalBestPrice" value="5" label="本方最新价"/>
+      <enum name="FiveLevelPrice" value="6" label="五档最优价"/>
+
+      <enum name="PurchasesETF " value="d" label="ETF申购"/>
+      <enum name="RedeemETF" value="e" label="ETF赎回"/>
+    </Field>
+    <Field name="CombOffsetFlag" type="String" length="4"  label="组合开平标志" description="组合开平标志"/>
+    <Field name="CombHedgeFlag" type="String" length="4"  label="组合投机套保标志" description="组合投机套保标志"/>
+    <Field name="LimitPrice" type="Double"  label="价格" description="价格"/>
+    <Field name="VolumeTotalOriginal" type="Int"  label="原始数量" description="原始数量"/>
+    <Field name="TimeCondition" type="EnumChar"  label="有效期类型" description="有效期类型" prefix="TC">
+      <enum name="IOC" value="1" label="立即完成，否则撤销"/>
+      <enum name="GFS" value="2" label="本节有效"/>
+      <enum name="GFD" value="3" label="当日有效"/>
+      <enum name="GTD" value="4" label="指定日期前有效"/>
+      <enum name="GTC" value="5" label="撤销前有效"/>
+      <enum name="GFA" value="6" label="集合竞价有效"/>
+    </Field>
+    <Field name="VolumeCondition" type="EnumChar"  label="成交量类型" description="成交量类型" prefix="VC">
+      <enum name="AV" value="1" label="任何数量"/>
+      <enum name="MV" value="2" label="最小数量"/>
+      <enum name="CV" value="3" label="全部数量"/>
+    </Field>
+    <Field name="MinVolume" type="Int"  label="最小成交量" description="最小成交量"/>
+
+    <Field name="ContingentCondition" type="EnumChar"  label="触发条件" description="触发条件" prefix="CC">
+      <enum name="Immediately" value="1" label="立即"/>
+      <enum name="Touch" value="2" label="止损"/>
+      <enum name="TouchProfit" value="3" label="止赢"/>
+      <enum name="ParkedOrder" value="4" label="预埋单"/>
+    </Field>
+    <Field name="StopPrice" type="Double"  label="止损价" description="止损价"/>
+    <Field name="ORRequestID" type="Int" label="请求编号" description="请求编号"/>
+    <Field name="OrderStatus" type="EnumChar"  label="报单状态" description="报单状态" prefix="OST">
+      <enum name="Unknown" value="0" label="未知"/>
+      <enum name="PendingNew" value="1" label="已提交"/>
+      <enum name="New" value="2" label="已接收"/>
+      <enum name="PartilyFilled" value="3" label="部分成交"/>
+      <enum name="Filled" value="4" label="全部成交"/>
+      <enum name="PartilyCanceled" value="5" label="部分成交部分撤单"/>
+      <enum name="Canceled" value="6" label="已撤单"/>
+      <enum name="Rejected" value="7" label="已拒绝"/>
+    </Field>
+    <Field name="OrderType" type="EnumChar"  label="报单类型" description="报单类型" prefix="ORDT">
+      <enum name="Normal" value="0" label="正常"/>
+      <enum name="DeriveFromQuote" value="1" label="报价衍生"/>
+      <enum name="DeriveFromCombination" value="2" label="组合衍生"/>
+      <enum name="Combination" value="3" label="组合报单"/>
+      <enum name="ConditionalOrder" value="4" label="条件单"/>
+      <enum name="Swap" value="5" label="互换单"/>
+    </Field>
+    <Field name="VolumeTraded" type="Int"  label="今成交数量" description="今成交数量"/>
+    <Field name="AmountTraded" type="Double"  label="今成交金额" description="今成交金额"/>
+    <Field name="VolumeRemain" type="Int"  label="剩余数量" description="剩余数量"/>
+    <Field name="InsertDate" type="Int"  label="报单日期" description="报单日期"/>
+    <Field name="InsertTime" type="Int"   label="委托时间" description="委托时间"/>
+    <Field name="ActiveTime" type="Int"   label="激活时间" description="激活时间"/>
+    <Field name="SuspendTime" type="Int"   label="挂起时间" description="挂起时间"/>
+    <Field name="CancelTime" type="Int"  label="撤销时间" description="撤销时间"/>
+    <Field name="OriginTime" type="Int"  label="原始时间" description="原始时间"/>
+    <Field name="FrontID" type="Int"  label="前置编号" description="前置编号"/>
+    <Field name="SessionID" type="Int"  label="会话编号" description="会话编号"/>
+    <Field name="OrderActionRef" type="String" length="10" label="被撤单引用" description="被撤单引用"/>
+    <Field name="StatusMsg" type="String" length="80"  label="状态信息" description="状态信息"/>
+    <Field name="PosiDirection" type="EnumChar"  label="持仓多空方向" description="持仓多空方向" prefix="PD">
+      <enum name="Short" value="1" label="空头"/>
+      <enum name="Long" value="0" label="多头"/>
+    </Field>
+    <Field name="YdPosition" type="Double"  label="上日持仓" description="上日持仓"/>
+    <Field name="TotalPosition" type="Double"  label="总持仓" description="总持仓"/>
+    <Field name="AvailablePosition" type="Double"  label="可用持仓数量（针对期权有效）" description="可用持仓数量（针对期权有效）"/>
+    <Field name="TodayPosition" type="Double"  label="今持仓" description="今持仓"/>
+    <Field name="LongFrozen" type="Double"  label="多头冻结" description="多头冻结"/>
+    <Field name="ShortFrozen" type="Double"  label="空头冻结" description="空头冻结"/>
+    <Field name="LongFrozenAmount" type="Double"  label="开仓冻结金额" description="开仓冻结金额"/>
+    <Field name="ShortFrozenAmount" type="Double"  label="开仓冻结金额" description="开仓冻结金额"/>
+    <Field name="OpenVolume" type="Double"  label="开仓量" description="开仓量"/>
+    <Field name="CloseVolume" type="Double"  label="平仓量" description="平仓量"/>
+    <Field name="CloseYdVolume" type="Double"  label="平昨仓量" description="平昨仓量"/>
+    <Field name="OpenAmount" type="Double"  label="开仓金额" description="开仓金额"/>
+    <Field name="CloseAmount" type="Double"  label="平仓金额" description="平仓金额"/>
+    <Field name="CloseYdAmount" type="Double"  label="平昨仓金额" description="平昨仓金额"/>
+    <Field name="PositionCost" type="Double"  label="持仓成本" description="持仓成本"/>
+    <Field name="TodayPositionCost" type="Double"  label="今仓持仓成本" description="今仓持仓成本"/>
+    <Field name="YdPositionCost" type="Double"  label="昨仓持仓成本" description="昨仓持仓成本"/>
+    <Field name="FrozenCash" type="Double"  label="冻结的资金" description="冻结的资金"/>
+    <Field name="PreSettlementPrice" type="Double"  label="上次结算价" description="上次结算价"/>
+    <Field name="SettlementPrice" type="Double"  label="本次结算价" description="本次结算价"/>
+    <Field name="PreClosePrice" type="Double"  label="昨收盘价" description="昨收盘价"/>
+    <Field name="ClosePrice" type="Double"  label="收盘价" description="收盘价"/>
+    <Field name="OpenCost" type="Double"  label="开仓成本" description="开仓成本"/>
+    <Field name="PreMortgage" type="Double"  label="上次质押金额" description="上次质押金额"/>
+    <Field name="PreCredit" type="Double"  label="上次信用额度" description="上次信用额度"/>
+    <Field name="PreDeposit" type="Double"  label="上次存款额" description="上次存款额"/>
+    <Field name="PreBalance" type="Double"  label="上次结算准备金" description="上次结算准备金"/>
+    <Field name="PreMargin" type="Double"  label="上次占用的保证金" description="上次占用的保证金"/>
+    <Field name="Deposit" type="Double"  label="入金金额" description="入金金额"/>
+    <Field name="Withdraw" type="Double"  label="出金金额" description="出金金额"/>
+    <Field name="FrozenMargin" type="Double"  label="冻结的保证金" description="冻结的保证金"/>
+    <Field name="UseMargin" type="Double"  label="仓位占用保证金" description="仓位占用保证金"/>
+    <Field name="FrozenCommission" type="Double"  label="冻结的手续费" description="冻结的手续费"/>
+    <Field name="CurrMargin" type="Double"  label="当前保证金总额" description="当前保证金总额"/>
+    <Field name="CashIn" type="Double"  label="资金差额" description="资金差额"/>
+    <Field name="Commission" type="Double"  label="手续费" description="手续费"/>
+    <Field name="TradeFee" type="Double"  label="交易费" description="交易费"/>
+    <Field name="TransferFee" type="Double"  label="过户费" description="过户费"/>
+    <Field name="StampTax" type="Double"  label="印花税" description="印花税"/>
+    <Field name="HandlingFee" type="Double"  label="经手费" description="经手费"/>
+    <Field name="AdminFee" type="Double"  label="证管费" description="证管费"/>
+    <Field name="ClearingFee" type="Double"  label="结算费" description="结算费"/>
+    <Field name="DeliveryFee" type="Double"  label="交割费" description="交割费"/>
+    <Field name="OtherFee" type="Double"  label="其他费用" description="其他费用"/>
+    <Field name="CapitalDirection" type="EnumChar"  label="资金变化方向" description="资金变化方向" prefix="CPD">
+      <enum name="Nochange" value="0" label="不变"/>
+      <enum name="Increase" value="1" label="增加"/>
+      <enum name="Decrease" value="2" label="减少"/>
+    </Field>
+    <Field name="PositionDirection" type="EnumChar"   label="持仓变化方向" description="持仓变化方向" prefix="PSD">
+      <enum name="Nochange" value="0" label="不变"/>
+      <enum name="Increase" value="1" label="增加"/>
+      <enum name="Decrease" value="2" label="减少"/>
+    </Field>
+    <Field name="Balance" type="Double"  label="结算准备金" description="结算准备金"/>
+    <Field name="Available" type="Double"  label="现金" description="现金"/>
+    <Field name="WithdrawQuota" type="Double"  label="可取资金" description="可取资金"/>
+    <Field name="Reserve" type="Double"  label="基本准备金" description="基本准备金"/>
+    <Field name="Credit" type="Double"  label="保证金可用余额" description="保证金可用余额"/>
+    <Field name="SettleMargin" type="Double"  label="结算保证金总额" description="结算保证金总额"/>
+    <Field name="CloseProfit" type="Double"  label="平仓盈亏" description="平仓盈亏"/>
+    <Field name="CloseProfitByDate" type="Double"  label="逐日平仓盈亏" description="逐日平仓盈亏"/>
+    <Field name="CloseProfitByTrade" type="Double"  label="逐笔平仓盈亏" description="逐笔平仓盈亏"/>
+    <Field name="PositionProfit" type="Double"  label="持仓盈亏" description="持仓盈亏"/>
+    <Field name="PositionProfitByDate" type="Double"  label="逐日持仓盈亏" description="逐日持仓盈亏"/>
+    <Field name="PositionProfitByTrade" type="Double"  label="逐笔持仓盈亏" description="逐笔持仓盈亏"/>
+    <Field name="PositionDate" type="EnumChar"  label="持仓日期标志" description="持仓日期标志" prefix="PSD">
+      <enum name="Today" value="1" label="今日持仓"/>
+      <enum name="History" value="2" label="历史持仓"/>
+    </Field>
+    <Field name="PreOpenInterest" type="Double" label="昨持仓量" description="昨持仓量"/>
+    <Field name="OpenPrice" type="Double" label="今开盘" description="今开盘"/>
+    <Field name="HighestPrice" type="Double" label="最高价" description="最高价"/>
+    <Field name="LowestPrice" type="Double" label="最低价" description="最低价"/>
+    <Field name="TradeVolume" type="Double" label="成交量" description="成交量（行情）"/>
+    <Field name="Turnover" type="Double" label="成交金额" description="成交金额"/>
+    <Field name="OpenInterest" type="Double" label="持仓量" description="持仓量"/>
+    <Field name="UpperLimitPrice" type="Double" label="涨停板价" description="涨停板价"/>
+    <Field name="LowerLimitPrice" type="Double" label="跌停板价" description="跌停板价"/>
+    <Field name="PreDelta" type="Double" label="昨虚实度" description="昨虚实度"/>
+    <Field name="CurrDelta" type="Double" label="今虚实度" description="今虚实度"/>
+    <Field name="PreIOPV" type="Double" label="昨日基金净值" description="昨日基金净值"/>
+    <Field name="IOPV" type="Double" label="基金净值" description="基金净值"/>
+    <Field name="AuctionPrice" type="Double" label="动态参考价格" description="动态参考价格"/>
+    <Field name="UpdateTime" type="Int" label="最后修改时间" description="最后修改时间"/>
+    <Field name="UpdateMillisec" type="Int" label="最后修改毫秒" description="最后修改毫秒"/>
+    <Field name="BidPrice1" type="Double" label="申买价一" description="申买价一"/>
+    <Field name="BidVolume1" type="Double" label="申买量一" description="申买量一"/>
+    <Field name="AskPrice1" type="Double" label="申卖价一" description="申卖价一"/>
+    <Field name="AskVolume1" type="Double" label="申卖量一" description="申卖量一"/>
+    <Field name="BidPrice2" type="Double" label="申买价二" description="申买价二"/>
+    <Field name="BidVolume2" type="Double" label="申买量二" description="申买量二"/>
+    <Field name="AskPrice2" type="Double" label="申卖价二" description="申卖价二"/>
+    <Field name="AskVolume2" type="Double" label="申卖量二" description="申卖量二"/>
+    <Field name="BidPrice3" type="Double" label="申买价三" description="申买价三"/>
+    <Field name="BidVolume3" type="Double" label="申买量三" description="申买量三"/>
+    <Field name="AskPrice3" type="Double" label="申卖价三" description="申卖价三"/>
+    <Field name="AskVolume3" type="Double" label="申卖量三" description="申卖量三"/>
+    <Field name="BidPrice4" type="Double" label="申买价四" description="申买价四"/>
+    <Field name="BidVolume4" type="Double" label="申买量四" description="申买量四"/>
+    <Field name="AskPrice4" type="Double" label="申卖价四" description="申卖价四"/>
+    <Field name="AskVolume4" type="Double" label="申卖量四" description="申卖量四"/>
+    <Field name="BidPrice5" type="Double" label="申买价五" description="申买价五"/>
+    <Field name="BidVolume5" type="Double" label="申买量五" description="申买量五"/>
+    <Field name="AskPrice5" type="Double" label="申卖价五" description="申卖价五"/>
+    <Field name="AskVolume5" type="Double" label="申卖量五" description="申卖量五"/>
+    <Field name="AveragePrice" type="Double" label="当日均价" description="当日均价"/>
+    <Field name="ActionDay" type="Int" label="业务日期" description="业务日期"/>
+    <Field name="TradingPhase" type="EnumChar" label="交易阶段" description="交易阶段" prefix="TP">
+      <enum name="NonTrade" value="0" label="非交易时段"/>
+      <enum name="Bidding" value="1" label="集合竞价时段"/>
+      <enum name="Continuous" value="2" label="连续交易时段"/>
+      <enum name="Suspension" value="3" label="停牌时段"/>
+      <enum name="Fuse" value="4" label="熔断时段"/>
+    </Field>
+    <Field name="OpenRestriction" type="EnumChar" label="开仓限制" description="开仓限制" prefix="OR">
+      <enum name="None" value="0" label="无开仓限制"/>
+      <enum name="NoCoverOpen" value="1" label="限制备兑开仓"/>
+      <enum name="NoSellOpen" value="2" label="限制卖出开仓"/>
+      <enum name="NoSellAndCoverOpen" value="3" label="限制卖出开仓、备兑开仓"/>
+      <enum name="NoBuyOpen" value="4" label="限制买入开仓"/>
+      <enum name="NoBuyAndCoverOpen" value="5" label="限制买入开仓、备兑开仓"/>
+      <enum name="NoBuyAndSellOpen" value="6" label="限制买入开仓、卖出开仓"/>
+      <enum name="NoBuySellAndCoverOpen" value="7" label="限制买入开仓、卖出开仓、备兑开仓"/>
+    </Field>
+    <Field name="ErrorID" type="Int" label="错误代码" description="错误代码"/>
+    <Field name="IsLast"  type="Int" label="结束标志" description="结束标志"/>
+    <Field name="ErrorMsg" type="String" length="80" label="错误信息" description="错误信息"/>
+    <Field name="ComboIDList" type="String" length="512" label="可用组合列表（以|分割）" description="可用组合列表（以|分割）"/>
+
+
+    <Field name='InstrumentCode' type="String" length='20' label="合约交易代码" description="合约交易代码" />
+    <Field name="PositionType" type="EnumChar" label="持仓类型" description="持仓类型" prefix="PT">
+      <enum name="Net" value="1" label="净持仓"/>
+      <enum name="Gross" value="2" label="综合持仓"/>
+    </Field>
+    <Field name="PositionDateType" type="EnumChar" label="持仓日期类型" description="说明区分使用今日持仓或者使用历史持仓" >
+      <enum name="UseHistory" value="1" label="使用历史持仓"/>
+      <enum name="NoUseHistory" value="2" label="不使用历史持仓"/>
+    </Field>
+    <Field name="ExchangeName" type="String" length="50" label="交易所名称" description="交易所名称" />
+    <Field name="SeatName" type="String" length="50" label="席位名称" description="席位名称" />
+    <Field name="InvestorType" type="EnumChar" label="投资者类型" description="投资者类型" prefix="IT" >
+      <enum name="Person" value="1" label="自然人"/>
+      <enum name="Company" value="2" label="法人"/>
+      <enum name="Fund" value="3" label="投资基金"/>
+      <enum name="SpecialOrgan" value="4" label="特殊法人"/>
+      <enum name="Asset" value="5" label="资管户"/>
+      <enum name="Admin" value="a" label="系统管理员" />
+    </Field>
+    <Field name="IDCardType" type="EnumChar" label="证件类型" description="证件号类型" prefix="DCT" >
+      <enum name="EID" value="0" label="组织机构代码"/>
+      <enum name="IDCard" value="1" label="中国公民身份证"/>
+      <enum name="OfficerIDCard" value="2" label="军官证"/>
+      <enum name="PoliceIDCard" value="3" label="警官证"/>
+      <enum name="SoldierIDCard" value="4" label="士兵证"/>
+      <enum name="HouseholdRegister " value="5" label="户口簿"/>
+      <enum name="Passport" value="6" label="护照"/>
+      <enum name="TaiwanCompatriotIDCard " value="7" label="台胞证"/>
+      <enum name="HomeComingCard" value="8" label="回乡证"/>
+      <enum name="LicenseNo" value="9" label="营业执照号"/>
+      <enum name="TaxNo" value="A" label="税务登记号/当地纳税ID"/>
+      <enum name="HMMainlandTravelPermit " value="B" label="港澳居民来往内地通行证"/>
+      <enum name="TwMainlandTravelPermit" value="C" label="台湾居民来往大陆通行证"/>
+      <enum name="DrivingLicense" value="D" label="驾照"/>
+      <enum name="SocialID" value="F" label="当地社保ID"/>
+      <enum name="LocalID" value="G" label="当地身份证"/>
+      <enum name="BusinessRegistration " value="H" label="商业登记证"/>
+      <enum name="HKMCIDCard " value="I" label="港澳永久性居民身份证"/>
+      <enum name="AccountsPermits" value="J" label="人行开户许可证"/>
+      <enum name="PermanantResidence" value="K" label="外国人永久居留证"/>
+      <enum name="AssetProductRecord" value="L" label="资管产品备案函"/>
+      <enum name="OtherCard" value="x" label="其他证件"/>
+    </Field>
+    <Field name="IDCardNo" type="String" length="100" label="证件号" description="证件号" />
+    <Field name="TradingCodeType" type="EnumChar" label="交易编码类型" description="交易编码类型" prefix="TC" >
+      <enum name="Speculation" value="1" label="投机"/>
+      <enum name="Arbitrage" value="2" label="套利"/>
+      <enum name="Hedge" value="3" label="套保"/>
+      <enum name="MarketMaker" value="4" label="做市商"/>
+    </Field>
+    <Field name="IsDefault" type="Int" label="缺省状态" description="缺省状态" />
+    <Field name="Margin" type="Double" label="投资者保证金" description="投资者保证金（由交易系统计算）" />
+    <Field name="OptClientID" type="String" length="10" label="投资者账户子编码" description="期权子账号，股票期权填写为888" />
+    <Field name="OptCommissionType" type="EnumChar" label="期权费用类型" description="期权费用类型" prefix="OPT_CT"  >
+      <enum name="StrikeFee" value="1" label="行权费"/>
+      <enum name="BeStrikeDFee" value="2" label="被行权费"/>
+      <enum name="TransferFee" value="3" label="行权过户费"/>
+      <enum name="Brokerage" value="4" label="经手费"/>
+      <enum name="TradeFee" value="5" label="交易费"/>
+      <enum name="SettleFee" value="6" label="结算费"/>
+    </Field>
+    <Field name="CommDirection" type="EnumChar" label="委托方向" description="委托方向" prefix="CD" >
+      <enum name="BuyOpen" value="1" label="买开"/>
+      <enum name="BuyClose" value="2" label="买平"/>
+      <enum name="SellOpen" value="3" label="卖开"/>
+      <enum name="SellClose" value="4" label="卖平"/>
+      <enum name="CallStrike" value="5" label="行权认购" />
+      <enum name="PutStrike" value="6" label="行权认沽" />
+    </Field>
+    <Field name="RateType" type="EnumChar" label="计算方式" description="计算方式" prefix="RT" >
+      <enum name="ByVolume" value="1" label="按手数"/>
+      <enum name="ByMoney" value="2" label="按金额"/>
+      <enum name="ByFace" value="3" label="按面值"/>
+    </Field>
+    <Field name="Rate" type="Double" label="费率值" description="费率值" />
+    <Field name="IsFloat" type="Int" label="是否按比例上浮" description="按比例表示在交易所收取的基础上上调，否则按设置比例收取" />
+    <Field name="GroupID" type="String" length="14" label="分组编号" description="分组编号" />
+    <Field name="GroupName" type="String" length="50" label="分组名称" description="分组名称" />
+    <Field name="DepartmentID" type="String" length="14"  label="组织架构代码" description="组织架构代码" />
+    <Field name="DeptName" type="String" length="50" label="组织架构名称" description="组织架构名称" />
+    <Field name="OperatorID" type="Int" label="操作员代码" description="操作员代码" />
+    <Field name="OperatorName" type="String" length="20" label="操作员名称" description="操作员名称" />
+    <Field name="ProductName" type="String" length="50" label="产品名称" description="产品名称" />
+    <Field name="InvestUnitID" type="String" length="14" label="投资单元代码" description="投资单元代码" />
+    <Field name="MarginRate" type="Double" label="投资者保证金率" description="投资者保证金（由交易系统填充）" />
+    <Field name="SeatID" type="String" length="10" label="席位号" description="席位号" iskey="yes" />
+    <Field name="AccountName" type="String" length="50" label="资金账户名称" description="资金账户名称" />
+    <Field name="CurrencyID" type="String" length="3" label="币种代码" description="币种代码" />
+    <Field name="InvestUnitName" type="String" length="50" label="投资单元名称" description="投资单元名称" />
+    <Field name="OptionType" type="EnumChar" label="期权类型" description="期权类型，认购、认沽" prefix="OPT_TY" >
+      <enum name="Call" value="C" label="认购" />
+      <enum name="Put" value="P" label="认沽" />
+    </Field>
+    <Field name="CashOut" type="Double" label="出金金额"  description="出金金额" />
+    <Field name="MaxMarketOrderVolume" type="Int" label="市价最大下单量" description="市价最大下单量，交易时需判断" />
+    <Field name="MinMarketOrderVolume" type="Int" label="市价最小下单量" description="市价最小下单量，交易时需判断" />
+    <Field name="MaxLimitOrderVolume" type="Int" label="限价最大下单量" description="限价最大下单量，交易时需判断" />
+    <Field name="MinLimitOrderVolume" type="Int" label="限价最小下单量" description="限价最小下单量，交易时需判断" />
+    <Field name="ExerciseDay" type="Int" label="行权日" description="行权日" />
+    <Field name="PortfolioID" type="String" length="14" label="投资组合代码" description="投资组合代码"  />
+    <Field name="TradeCode" type="String" length="18" label="交易编码" description="交易编码,证券账户" />
+    <Field name="SystemStatus" type="EnumChar" label="系统状态" description="系统状态" prefix="STS">
+      <enum name="SyncDone" value="1" label="导入数据完成" />
+      <enum name="Trading" value="2" label="盘中交易状态" />
+      <enum name="Closed" value="3" label="收市完成" />
+      <enum name="Settled" value="4" label="结算完成" />
+    </Field>
+
+    <Field name="RuleID" type="Int" label="规则编号" description="规则编号" />
+
+    <Field name="RuleCode" type="String" length="128"  label="规则代码" description="规则代码" />
+    <Field name="RiskId" type="Int" label="规则ID" description="规则ID"/>
+    <Field name="RuleName" type="String" length="50" label="规则名称" description="规则名称" />
+    <Field name="Value" type="String" length="256" label="修改内容明细（json字符串）" description="修改内容明细（json字符串）" />
+
+    <Field name="BuyVolumeTick" type="Int" label="最小买入变动手数" description="最小买入变动手数" />
+    <Field name="SellVolumeTick" type="Int" label="最小卖出变动手数" description="最小卖出变动手数" />
+
+    <Field name="ThirdReff1" type="String" length="20" label="预留字段1" description="预留字段1" />
+    <Field name="ThirdReff2" type="String" length="50" label="预留字段2" description="预留字段2" />
+
+    <Field name="InvestorIDs" type="String" length="256" label="投资者代码集合" description="投资者代码集合，以英文逗号隔开" />
+    <Field name="InstrumentIDs" type="String" length="512" label="合约代码集合" description="合约代码集合，以英文逗号隔开" />
+    <Field name="InstrumentRange" type="EnumChar" label="合约范围" description="合约范围: 单一合约、产品类型、所有" prefix="INSTR">
+      <enum name="ALL" value="1" label="所有" />
+      <enum name="PRODUCT_CLASS" value="2" label="产品类型" />
+      <enum name="SINGLE" value="3" label="单一合约" />
+    </Field>
+    <Field name="InstrumentControlFlag" type="Int" label="合约联合风控" description="合约联合风控 如果为true则配置的InstrumentIDs联合检查， 否则检查单个（所谓单个是指当前OrderReq所属的Instrument or ProductClass）" />
+    <Field name="InvestorControlFlag" type="Int" label="投资账户联合风控" description="投资账户联合风控 如果为true 则配置的InvestorIDs 联合检查，否则检查单个（所谓单个是指当前OrderReq所属的Investor or Group ）"  />
+    <Field name="SeatType" type="EnumChar" label="席位类型" description="席位类型" prefix="ST" >
+      <enum name="SHOPT" value="1" label="上交所期权" />
+      <enum name="SHSTK" value="2" label="上交所股票" />
+      <enum name="SZOPT" value="3" label="深交所期权" />
+      <enum name="SZSTK" value="4" label="深交所股票" />
+      <enum name="FEMAS" value="5" label="飞马" />
+    </Field>
+
+    <Field name="GatewayID" type="Int" label="网关编号" description="网关编号" iskey="yes"/>
+    <Field name="FrontAddress" type="String" length="31" label="前置地址" description="前置地址" />
+    <Field name="ResumeType" type="EnumChar" label="私有流重传方式" description="私有流重传方式" prefix="RT" >
+      <enum name="Restart" value="0" label="重传" />
+      <enum name="Resume" value="1" label="续传" />
+      <enum name="Quick" value="2" label="当前开始" />
+    </Field>
+    <Field name="FlowPath" type="String" length="127" label="流文件路径" description="流文件保存路径" />
+    <Field name="AdminCode" type="String" length="32"  label="指令代码" description="指令代码"  />
+    <Field name="Threshold" type="Double" label="规则阀值" description="规则阀值"/>
+    <Field name="CalcValue" type="Double" label="计算指标值" description="计算指标值"/>
+    <Field name="StartDeliveryDay" type="Int" label="开始交割日" description="开始交割日" />
+    <Field name="EndDeliveryDay" type="Int" label="结束交割日" description="结束交割日" />
+    <Field name="UnderlyingInstrumentID" type="String" length="30" label="基础商品代码" description="基础商品代码" />
+    <Field name="UnderlyingMultiple" type="Int" label="基础商品乘数" description="基础商品乘数" />
+    <Field name="KeyInstrumentID"  type="String" length="30"  label="投资组合对应的合约代码" description="投资组合对应的合约代码" />
+    <Field name="NextTradingDay" type="Int"  label="下一交易日" description="下一交易日"/>
+    <Field name="CompanyID" type="Int" label="公司编号" description="公司编号" />
+    <Field name="CompanyName" type="String" length="50" label="公司名称" description="公司名称"/>
+    <Field name="CompanyType" type="EnumChar" label="公司类型" description="公司类型" prefix="CT">
+      <enum name="INSIDE" value="1" label="内部机构" />
+      <enum name="OUTSIDE" value="2" label="机构客户" />
+    </Field>
+    <Field name="OpRoles" type="String" length="100" label="操作员角色" description="操作员角色"/>
+    <Field name="QryAccountIDs" type="String" length="500" label="操作员可以查询的账户集合" description="操作员可以查询的账户集合"/>
+    <Field name="OpAccountIDs" type="String" length="500" label="操作员可以操作的账户集合" description="操作员可以操作的账户集合"/>
+    <Field name="OpTel" type="String" length="40" label="操作员电话" description="操作员电话"/>
+    <Field name="OpEmail" type="String" length="40" label="操作员邮箱" description="操作员邮箱"/>
+    <Field name="RegiDate" type="String" length="14" label="注册时间" description="注册时间"/>
+    <Field name="EnbFlag"  type="EnumChar" label="状态标志" description="状态标志" prefix="EF">
+      <enum name="NORMAL" value="N" label="正常" />
+      <enum name="OFF" value="C" label="被关闭" />
+      <enum name="LOCK" value="L" label="锁定" />
+	  <enum name="UNSYNC" value="1" label="新增未同步" />
+    </Field>
+    <Field name="UptTime" type="String" length="14" label="修改时间" description="修改时间"/>
+    <Field name="LogTime" type="String" length="14" label="登录时间" description="登录时间"/>
+    <Field name="PwdUptTime" type="String" length="14" label="密码修改时间" description="密码修改时间"/>
+    <Field name="LogErrTime" type="String" length="14" label="登录错误时间" description="登录错误时间"/>
+    <Field name="PwdErrCnt" type="Int" label="密码错误次数" description="密码错误次数"/>
+
+    <Field name="AuthID" type="String" length="8" label="权限ID" description="权限ID" />
+    <Field name="AuthLevel" type="Int" label="权限级别" description="权限级别" />
+    <Field name="AuthDesc"  type="String" length="30" label="权限描述" description="权限描述"/>
+    <Field name="ParentID"  type="String" length="8" label="父权限" description="父权限"/>
+    <Field name="HaveSon" type="Int" label="是否有下级权限" description="是否有下级权限"/>
+    <Field name="ID" type="Int" label="顺序号" description="顺序号"/>
+    <Field name="IsDisplay" type="Int" label="权限是否作为功能显示在控台" description="权限是否作为功能显示在控台"/>
+    <Field name="Action" type="String" length="60"  label="动作" description="动作"/>
+    <Field name="ActionDesc" type="String" length="3000"  label="动作描述" description="动作描述"/>
+    <Field name="Resv" type="String" length="60"  label="保留" description="保留"/>
+    <Field name="CrtTime" type="String" length="14" label="创建时间" description="创建时间"/>
+    <Field name="LastUptTime" type="String" length="14" label="最近一次更新时间" description="最近一次更新时间"/>
+    <Field name="ActionType" type="EnumChar" label="功能类型" description="功能类型" prefix="ACT">
+      <enum name="CLIENT" value="1" label="客户端" />
+      <enum name="WEB" value="2" label="web端" />
+      <enum name="MARKET" value="3" label="行情平台" />
+    </Field>
+    <Field name="AuthType" type="EnumChar" label="权限类型" description="权限类型" prefix="AUT">
+      <enum name="GENERAL" value="0" label="通用" />
+      <enum name="INSIDE" value="1" label="内部机构" />
+      <enum name="OUTSIDE" value="2" label="机构客户" />
+    </Field>
+    <Field name="LastUsrTime"  type="String" length="14"  label="最近一次使用时间" description="最近一次使用时间"/>
+    <Field name="UsrCount" type="Int" label="使用次数" description="使用次数"/>
+    <Field name="CmdID" type="String" length="100" label="接口标识" description="接口标识"/>
+    <Field name="SysDate" type="Int" label="系统日期" description="系统日期,非帐务日期" />
+	<Field name="SysSeqID" type="String" length="10" label="系统流水" description="系统流水" />
+	<Field name="FilePostFix" type="String" length="10" label="后缀文件类型" description="后缀文件类型" />
+    <Field name="SysTime" type="Int" label="系统时间" description="系统时间" />
+
+    <Field name="RoleID" type="String" length="3" label="角色号" description="角色号，3位序列" />
+    <Field name="RoleName" type="String" length="20" label="角色名称" description="角色名称，唯一" />
+
+    <Field name="FileName" type="String" length="120" label="文件名称" description="文件名称" />
+    <Field name="FileUrl" type="String" length="120" label="文件存储路径" description="文件存储路径" />
+    <Field name="FileInfo" type="String" length="120" label="文件查询条件" description="文件查询条件" />
+    <Field name="FileFlag"  type="EnumChar" label="请求执行状态" description="请求执行状态">
+      <enum name="InProgress" value="I" label="处理中" />
+      <enum name="Success" value="S" label="生成成功" />
+      <enum name="Fail" value="F" label="生成失败" />
+    </Field>
+    <Field name="CreateDate" type="Int" label="文件生成日期" description="文件生成日期" />
+    <Field name="CreateTime" type="Int" label="文件生成时间" description="文件生成时间" />
+    <Field name="UpdateDate" type="Int" label="更新日期" description="更新日期" />
+    <Field name="SeqName" type="String" length="50" label="序列名称" description="序列名称" />
+    <Field name="CurrentVal" type="Int" label="当前序列值" description="当前序列值" />
+    <Field name="IncrementVal" type="Int" label="当前增长值" description="当前增长值" />
+    <Field name="LimitConNum" type="Int" label="允许连接个数" description="允许连接个数" />
+    <Field name="LimitSubNum" type="Int" label="允许订阅个数" description="允许订阅个数" />
+    <Field name="IpAddress" type="String" length="500" label="连接IP地址白名单" description="多个IP地址集合，用逗号分隔 默认为空，不控制" />
+    <Field name="PaySubject"  type="EnumChar" label="缴费科目" description="缴费科目" prefix="PSJ">
+      <enum name="GENERAL" value="1" label="通用费用" />
+    </Field>
+    <Field name="LastPayTime" type="String" length="14" label="最近缴费时间" description="最近缴费时间" />
+    <Field name="PayBalance" type="Double" label="缴费金额" description="缴费金额" />
+    <Field name="StartDate" type="Int" label="起始日期" description="起始日期" />
+    <Field name="EndDate" type="Int" label="到期日期" description="到期日期" />
+    <Field name="PayTime" type="String" length="14" label="缴费时间" description="缴费时间" />
+    <Field name="PayID" type="Int" label="流水序号" description="流水序号" />
+    <Field name="AccountID" type="Int" label="账户编号" description="账户编号" />
+    <Field name="AccountType" type="EnumChar" label="账户类型" description="账户类型" prefix="AT">
+      <enum name="STOCK" value="1" label="普通证券账户" />
+      <enum name="CREDIT" value="2" label="信用账户" />
+      <enum name="DERIVATIVE" value="3" label="衍生品账户" />
+      <enum name="FUTURES" value="4" label="期货账户" />
+    </Field>
+    <Field name="ChannelID" type="Int" label="交易通道编号" description="交易通道编号"/>
+    <Field name="DefaultCombo" type="Int" label="默认组合" description="默认组合编号"/>
+    <Field name="ClientID" type="String" length="50" label="客户号" description="客户号" />
+    <Field name="ChannelName" type="String" length="50" label="通道名称" description="通道名称" />
+    <Field name="ChannelType" type="EnumChar" label="通道类型" description="通道类型" prefix="CHT">
+      <enum name="UFT" value="1" label="UFT分仓" />
+      <enum name="CTP" value="2" label="CTP分仓" />
+      <enum name="FEMAS" value="3" label="飞马分仓" />
+      <enum name="O32" value="4" label="O32分仓" />
+    </Field>
+    <Field name="SysIP" type="String" length="20" label="分仓接口IP" description="分仓接口IP"  />
+    <Field name="SysPort" type="String" length="10" label="分仓接口端口" description="分仓接口端口" />
+    <Field name="ManualFrozenCash" type="Double" label="手工冻结的资金" description="手工冻结的资金"/>
+	<Field name="CheckCash" type="Double" label="核对调整资金" description="核对调整资金"/>
+	<Field name="FrozenVolume"  type="Double" label="冻结数量" description="冻结数量" />
+    <Field name="ManualFrozenVolume"  type="Double" label="手工冻结数量" description="手工冻结数量" />
+	<Field name="CheckVolume"  type="Double" label="核对调整数量" description="核对调整数量" />
+	<Field name="EnableVolume" type="Double" label="可用数量" description="可用数量" />
+    <Field name="FeeType" type="EnumChar" label="费用类别" description="费用类别"  prefix="FT">
+      <enum name="TRADEFEE" value="1" label="交易费" />
+      <enum name="STAMPTAX" value="2" label="印花税" />
+      <enum name="TRANSFERFEE" value="3" label="过户费" />
+      <enum name="BROKERFEE" value="4" label="佣金" />
+      <enum name="HANDLINGFEE" value="5" label="经手费" />
+      <enum name="ADMINFEE" value="6" label="证管费" />
+      <enum name="OTHERFEE" value="7" label="其它费" />
+      <enum name="CLEARINGFEE" value="a" label="结算费" />
+      <enum name="SETTLEFEE" value="b" label="交割费" />
+      <enum name="PERORDER" value="c" label="委托申报费" />
+      <enum name="PERCANCEL" value="d" label="撤单申报费" />
+    </Field>
+    <Field name="BalanceRatio" type="Double" label="费用按成交金额比例" description="费用按成交金额比例" />
+    <Field name="FaceValueRatio" type="Double" label="费用按成交面值比例" description="费用按成交面值比例" />
+    <Field name="AmountRatio" type="Double" label="费用按成交数量比例" description="费用按成交数量比例" />
+    <Field name="MaxFee" type="Double" label="最高收费" description="最高收费" />
+    <Field name="MinFee" type="Double" label="最低收费" description="最低收费" />
+    <Field name="CalculateType" type="EnumChar" label="费用计算模式" description="费用计算模式" prefix="CT" >
+      <enum name="TOTAL" value="1" label="分笔" />
+      <enum name="PER" value="2" label="合笔" />
+    </Field>
+    <Field name="VolumeCanceled" type="Int" label="撤成\废单数量" description="撤成\废单数量"/>
+    <Field name="Remark" type="String" length="200" label="备注" description="备注"/>
+    <Field name="CancelFlag" type="EnumChar" label="撤单标志" description="撤单标志" prefix="CF" >
+      <enum name="ORDER" value="1" label="普通委托" />
+      <enum name="CANCEL" value="2" label="撤单委托" />
+    </Field>
+	<Field name="OrderIP" type="String" length="20" label="订单IP" description="订单IP"/>
+	<Field name="OrderMAC" type="String" length="20" label="订单MAC" description="订单MAC"/>
+	<Field name="OrderHDNum" type="String" length="50" label="订单硬盘序列号" description="订单硬盘序列号"/>
+	<Field name="OrderMacCode" type="String" length="50" label="订单机器码" description="订单机器码"/>
+	<Field name="OrderOS" type="String" length="50" label="订单操作系统" description="订单操作系统"/>
+	<Field name="StockRealBack" type="EnumChar" label="回报证券标志" description="回报证券标志" prefix="SRB" >
+	  <enum name="FALSE" value="0" label="买入证券当天不可用" />
+      <enum name="TRUE" value="1" label="买入证当天可用" />
+    </Field>	  
+	<Field name="FundRealBack" type="EnumChar" label="回报资金标志" description="回报资金标志" prefix="FRB" >
+	  <enum name="FALSE" value="0" label="卖出资金不可用" />
+      <enum name="TRUE" value="1" label="卖出资金当天可用" />
+    </Field>	
+  </Fields>
+</EntityModel>
