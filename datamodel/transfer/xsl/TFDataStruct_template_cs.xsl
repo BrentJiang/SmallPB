@@ -9,11 +9,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace TBondMMDataCS
+namespace SmallPB.entitymodel
 {<no_new_line />
     <xsl:for-each select="/EntityModel/Entities/Entity"><no_new_line />
     ///<xsl:value-of select="@title"/>
-    public struct STP<xsl:value-of select="translate(@name, ' ', '')"/>Field
+    public class Stp<xsl:value-of select="translate(@name, ' ', '')"/> // struct
     {<no_new_line />
       <xsl:for-each select="Field">
         <xsl:variable name="name" select="@name"/>
@@ -22,28 +22,28 @@ namespace TBondMMDataCS
         ///<xsl:value-of select="@label"/>
             <xsl:choose>
               <xsl:when test="@type='String'">
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = CommonDef.STP_<xsl:value-of select="translate(@name, $lowercase, $uppercase)"/>_LEN)]
-        public string <xsl:value-of select="translate(@name, ' ', '')"/>; <no_new_line />
+        //[MarshalAs(UnmanagedType.ByValTStr, SizeConst = CommonDef.STP_<xsl:value-of select="translate(@name, $lowercase, $uppercase)"/>_LEN)]
+        public string <xsl:value-of select="translate(@name, ' ', '')"/> { get; set; } <no_new_line />
               </xsl:when>
               <xsl:when test="@type='Int'">
-        public Int32 <xsl:value-of select="translate(@name, ' ', '')"/>;<no_new_line />
+        public Int32 <xsl:value-of select="translate(@name, ' ', '')"/> { get; set; }<no_new_line />
               </xsl:when>
               <xsl:when test="@type='Double'">
-        public double <xsl:value-of select="translate(@name, ' ', '')"/>;<no_new_line />
+        public double <xsl:value-of select="translate(@name, ' ', '')"/> { get; set; }<no_new_line />
               </xsl:when>
               <xsl:when test="@type='Date'">
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = CommonDef.STP_DATE_LEN)]
-        public string <xsl:value-of select="translate(@name, ' ', '')"/>;<no_new_line />
+        //[MarshalAs(UnmanagedType.ByValTStr, SizeConst = CommonDef.STP_DATE_LEN)]
+        public string <xsl:value-of select="translate(@name, ' ', '')"/> { get; set; }<no_new_line />
               </xsl:when>
               <xsl:when test="@type='Time'">
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = CommonDef.STP_TIME_LEN)]
-        public string <xsl:value-of select="translate(@name, ' ', '')"/>;<no_new_line />
+        //[MarshalAs(UnmanagedType.ByValTStr, SizeConst = CommonDef.STP_TIME_LEN)]
+        public string <xsl:value-of select="translate(@name, ' ', '')"/> { get; set; }<no_new_line />
               </xsl:when>
               <xsl:when test="@type='Bool'">
-        public byte <xsl:value-of select="translate(@name, ' ', '')"/>;<no_new_line />
+        public byte <xsl:value-of select="translate(@name, ' ', '')"/> { get; set; }<no_new_line />
               </xsl:when>
               <xsl:when test="@type='EnumChar'">
-        public char <xsl:value-of select="translate(@name, ' ', '')"/>;<no_new_line />
+        public char <xsl:value-of select="translate(@name, ' ', '')"/> { get; set; }<no_new_line />
               </xsl:when>
               <xsl:otherwise>
                 <xsl:message>

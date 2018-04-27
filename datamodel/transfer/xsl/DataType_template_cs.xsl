@@ -9,9 +9,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 
-namespace EntityModelCreator.models
+namespace SmallPB.entitymodel
 {
-    public class FfsEnumItem
+    public class StpEnumItem
     {
         public string Name { get; set; }
         public char Value { get; set; }
@@ -20,7 +20,7 @@ namespace EntityModelCreator.models
     <xsl:for-each select="EntityModel/Fields/Field[@type='EnumChar']">
       <xsl:variable name="prefix" select="@prefix"/>
       <xsl:variable name="name" select="translate(@name, ' ', '')"/>
-    public enum Ffs<xsl:copy-of select="$name"/>Enum 
+    public enum Stp<xsl:copy-of select="$name"/>Enum 
     {
 		  <xsl:for-each select="enum">
         <!--use @name to set value of enum-->
@@ -33,7 +33,7 @@ namespace EntityModelCreator.models
     <xsl:for-each select="EntityModel/Fields/Field[@type='EnumInt']">
       <xsl:variable name="prefix" select="@prefix"/>
       <xsl:variable name="name" select="translate(@name, ' ', '')"/>
-    public enum Ffs<xsl:copy-of select="$name"/>Enum 
+    public enum Stp<xsl:copy-of select="$name"/>Enum 
     {
 		  <xsl:for-each select="enum">
         <!--use @name to set value of enum-->
@@ -49,8 +49,8 @@ namespace EntityModelCreator.models
       <xsl:variable name="prefix" select="translate(@prefix, ' ', '')"/>
       <xsl:variable name="name" select="translate(@name, ' ', '')"/>
 		  <xsl:for-each select="enum">
-        public const char FFS_<xsl:value-of select="$prefix"/>_<xsl:value-of select="translate(@name, ' ', '')"/> = '<xsl:value-of select="@value"/>'; <no_new_line />
-        public const string FFS_<xsl:copy-of select="$prefix"/>_<xsl:value-of select="translate(@name, ' ', '')"/>_Label = "<xsl:value-of select="@label"/>"; <no_new_line />
+        public const char STP_<xsl:value-of select="$prefix"/>_<xsl:value-of select="translate(@name, ' ', '')"/> = '<xsl:value-of select="@value"/>'; <no_new_line />
+        public const string STP_<xsl:copy-of select="$prefix"/>_<xsl:value-of select="translate(@name, ' ', '')"/>_Label = "<xsl:value-of select="@label"/>"; <no_new_line />
       </xsl:for-each>
       <xsl:text> </xsl:text>
 		</xsl:for-each>
@@ -58,8 +58,8 @@ namespace EntityModelCreator.models
       <xsl:variable name="prefix" select="translate(@prefix, ' ', '')"/>
       <xsl:variable name="name" select="translate(@name, ' ', '')"/>
 		  <xsl:for-each select="enum">
-        public const char FFS_<xsl:value-of select="$prefix"/>_<xsl:value-of select="translate(@name, ' ', '')"/> = <xsl:value-of select="@value"/>; <no_new_line />
-        public const string FFS_<xsl:copy-of select="$prefix"/>_<xsl:value-of select="translate(@name, ' ', '')"/>_Label = "<xsl:value-of select="@label"/>"; <no_new_line />
+        public const char STP_<xsl:value-of select="$prefix"/>_<xsl:value-of select="translate(@name, ' ', '')"/> = <xsl:value-of select="@value"/>; <no_new_line />
+        public const string STP_<xsl:copy-of select="$prefix"/>_<xsl:value-of select="translate(@name, ' ', '')"/>_Label = "<xsl:value-of select="@label"/>"; <no_new_line />
       </xsl:for-each>
       <xsl:text> </xsl:text>
 		</xsl:for-each>
@@ -68,13 +68,13 @@ namespace EntityModelCreator.models
         ///常量定义
         /////////////////////////////////////////////////////////////////////////
         ///时间长度定义
-        public const int FFS_TIME_LEN = (9+1) ;
+        public const int STP_TIME_LEN = (9+1) ;
         ///日期长度定义
-        public const int FFS_DATE_LEN = (8+1) ;
+        public const int STP_DATE_LEN = (8+1) ;
 
 	  <xsl:for-each select="EntityModel/Fields/Field[@type='String']">
         ///<xsl:value-of select="@label"/>长度的定义
-  	    public const int FFS_<xsl:value-of select="translate(@name, $lowercase, $uppercase)"/>_LEN = (<xsl:value-of select="@length"/> + 1); <no_new_line />
+  	    public const int STP_<xsl:value-of select="translate(@name, $lowercase, $uppercase)"/>_LEN = (<xsl:value-of select="@length"/> + 1); <no_new_line />
 		</xsl:for-each>
     };
 }

@@ -3,16 +3,16 @@ using System;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 
-namespace SmallPB.entitymodel
+namespace EntityModelCreator.models
 {
-    public class StpEnumItem
+    public class FfsEnumItem
     {
         public string Name { get; set; }
         public char Value { get; set; }
     };
     
     
-    public enum StpProductClassEnum 
+    public enum FfsProductClassEnum 
     {
 		  PCFutures,
       PCOptions,
@@ -26,7 +26,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpInvestorRangeEnum 
+    public enum FfsInvestorRangeEnum 
     {
 		  IRAll,
       IRGroup,
@@ -36,7 +36,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpProviderTypeEnum 
+    public enum FfsProviderTypeEnum 
     {
 		  PTCtpFutureTd,
       PTCtpFutureMd,
@@ -51,7 +51,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpDirectionEnum 
+    public enum FfsDirectionEnum 
     {
 		  DBuy,
       DSell,
@@ -87,14 +87,14 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpQryAccountTypeEnum 
+    public enum FfsQryAccountTypeEnum 
     {
 		  QATOperate,
       QATQuery,
       
     };
        
-    public enum StpHedgeFlagEnum 
+    public enum FfsHedgeFlagEnum 
     {
 		  HFSpeculation,
       HFArbitrage,
@@ -103,7 +103,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpUserTypeEnum 
+    public enum FfsUserTypeEnum 
     {
 		  UTInvestor,
       UTOperator,
@@ -111,14 +111,14 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpCoveredFlagEnum 
+    public enum FfsCoveredFlagEnum 
     {
 		  CFUncovered,
       CFCovered,
       
     };
        
-    public enum StpOwnerTypeEnum 
+    public enum FfsOwnerTypeEnum 
     {
 		  OT0,
       OT1,
@@ -129,7 +129,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpInvestorLevelEnum 
+    public enum FfsInvestorLevelEnum 
     {
 		  IL1,
       IL2,
@@ -138,7 +138,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpOffsetFlagEnum 
+    public enum FfsOffsetFlagEnum 
     {
 		  OFOpen,
       OFClose,
@@ -153,7 +153,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpOrderPriceTypeEnum 
+    public enum FfsOrderPriceTypeEnum 
     {
 		  OPTAnyPrice,
       OPTLimitPrice,
@@ -166,7 +166,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpTimeConditionEnum 
+    public enum FfsTimeConditionEnum 
     {
 		  TCIOC,
       TCGFS,
@@ -177,7 +177,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpVolumeConditionEnum 
+    public enum FfsVolumeConditionEnum 
     {
 		  VCAV,
       VCMV,
@@ -185,7 +185,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpContingentConditionEnum 
+    public enum FfsContingentConditionEnum 
     {
 		  CCImmediately,
       CCTouch,
@@ -194,7 +194,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpOrderStatusEnum 
+    public enum FfsOrderStatusEnum 
     {
 		  OSTUnknown,
       OSTPendingNew,
@@ -207,7 +207,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpOrderTypeEnum 
+    public enum FfsOrderTypeEnum 
     {
 		  ORDTNormal,
       ORDTDeriveFromQuote,
@@ -218,14 +218,14 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpPosiDirectionEnum 
+    public enum FfsPosiDirectionEnum 
     {
 		  PDShort,
       PDLong,
       
     };
        
-    public enum StpChangeTypeEnum 
+    public enum FfsChangeTypeEnum 
     {
 		  CGTcheck,
       CGTfronzen,
@@ -234,7 +234,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpCapitalDirectionEnum 
+    public enum FfsCapitalDirectionEnum 
     {
 		  CPDNochange,
       CPDIncrease,
@@ -242,7 +242,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpPositionDirectionEnum 
+    public enum FfsPositionDirectionEnum 
     {
 		  PSDNochange,
       PSDIncrease,
@@ -250,14 +250,14 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpPositionDateEnum 
+    public enum FfsPositionDateEnum 
     {
 		  PSDToday,
       PSDHistory,
       
     };
        
-    public enum StpTradingPhaseEnum 
+    public enum FfsTradingPhaseEnum 
     {
 		  TPNonTrade,
       TPBidding,
@@ -267,7 +267,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpOpenRestrictionEnum 
+    public enum FfsOpenRestrictionEnum 
     {
 		  ORNone,
       ORNoCoverOpen,
@@ -280,21 +280,21 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpPositionTypeEnum 
+    public enum FfsPositionTypeEnum 
     {
 		  PTNet,
       PTGross,
       
     };
        
-    public enum StpPositionDateTypeEnum 
+    public enum FfsPositionDateTypeEnum 
     {
 		  UseHistory,
       NoUseHistory,
       
     };
        
-    public enum StpInvestorTypeEnum 
+    public enum FfsInvestorTypeEnum 
     {
 		  ITPerson,
       ITCompany,
@@ -305,7 +305,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpIDCardTypeEnum 
+    public enum FfsIDCardTypeEnum 
     {
 		  DCTEID,
       DCTIDCard,
@@ -332,7 +332,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpTradingCodeTypeEnum 
+    public enum FfsTradingCodeTypeEnum 
     {
 		  TCSpeculation,
       TCArbitrage,
@@ -341,7 +341,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpOptCommissionTypeEnum 
+    public enum FfsOptCommissionTypeEnum 
     {
 		  OPT_CTStrikeFee,
       OPT_CTBeStrikeDFee,
@@ -352,7 +352,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpCommDirectionEnum 
+    public enum FfsCommDirectionEnum 
     {
 		  CDBuyOpen,
       CDBuyClose,
@@ -363,7 +363,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpRateTypeEnum 
+    public enum FfsRateTypeEnum 
     {
 		  RTByVolume,
       RTByMoney,
@@ -371,7 +371,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpOperationTypeEnum 
+    public enum FfsOperationTypeEnum 
     {
 		  OPNTSync,
       OPNTAdmin,
@@ -380,14 +380,14 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpOptionTypeEnum 
+    public enum FfsOptionTypeEnum 
     {
 		  OPT_TYCall,
       OPT_TYPut,
       
     };
        
-    public enum StpSystemStatusEnum 
+    public enum FfsSystemStatusEnum 
     {
 		  STSSyncDone,
       STSTrading,
@@ -396,7 +396,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpInstrumentRangeEnum 
+    public enum FfsInstrumentRangeEnum 
     {
 		  INSTRALL,
       INSTRPRODUCT_CLASS,
@@ -404,7 +404,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpSeatTypeEnum 
+    public enum FfsSeatTypeEnum 
     {
 		  STSHOPT,
       STSHSTK,
@@ -414,7 +414,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpResumeTypeEnum 
+    public enum FfsResumeTypeEnum 
     {
 		  RTRestart,
       RTResume,
@@ -422,7 +422,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpCompanyTypeEnum 
+    public enum FfsCompanyTypeEnum 
     {
 		  CTINSIDE,
       CTORGAN,
@@ -430,7 +430,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpEnbFlagEnum 
+    public enum FfsEnbFlagEnum 
     {
 		  EFNORMAL,
       EFOFF,
@@ -439,7 +439,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpActionTypeEnum 
+    public enum FfsActionTypeEnum 
     {
 		  ACTCLIENT,
       ACTWEB,
@@ -447,7 +447,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpAuthTypeEnum 
+    public enum FfsAuthTypeEnum 
     {
 		  AUTGENERAL,
       AUTINSIDE,
@@ -455,7 +455,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpFileFlagEnum 
+    public enum FfsFileFlagEnum 
     {
 		  InProgress,
       Success,
@@ -463,20 +463,20 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpMarketDataTypeEnum 
+    public enum FfsMarketDataTypeEnum 
     {
 		  MDTREAL,
       MDTHIS,
       
     };
        
-    public enum StpPaySubjectEnum 
+    public enum FfsPaySubjectEnum 
     {
 		  PSJGENERAL,
       
     };
        
-    public enum StpAccountTypeEnum 
+    public enum FfsAccountTypeEnum 
     {
 		  ATSTOCK,
       ATCREDIT,
@@ -485,7 +485,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpChannelTypeEnum 
+    public enum FfsChannelTypeEnum 
     {
 		  CHTUFT,
       CHTCTP,
@@ -495,7 +495,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpFeeTypeEnum 
+    public enum FfsFeeTypeEnum 
     {
 		  FTTRADEFEE,
       FTSTAMPTAX,
@@ -511,49 +511,49 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpCalculateTypeEnum 
+    public enum FfsCalculateTypeEnum 
     {
 		  CTTOTAL,
       CTPER,
       
     };
        
-    public enum StpCancelFlagEnum 
+    public enum FfsCancelFlagEnum 
     {
 		  CFORDER,
       CFCANCEL,
       
     };
        
-    public enum StpStockRealBackEnum 
+    public enum FfsStockRealBackEnum 
     {
 		  SRBFALSE,
       SRBTRUE,
       
     };
        
-    public enum StpFundRealBackEnum 
+    public enum FfsFundRealBackEnum 
     {
 		  FRBFALSE,
       FRBTRUE,
       
     };
        
-    public enum StpInstrumentControlLevelEnum 
+    public enum FfsInstrumentControlLevelEnum 
     {
 		  INSTC_LEVELPRODUCT_CLASS,
       INSTC_LEVELSINGLE,
       
     };
        
-    public enum StpInstrumentRangeTypeEnum 
+    public enum FfsInstrumentRangeTypeEnum 
     {
 		  INSTC_RANGEALL,
       INSTC_RANGESET,
       
     };
        
-    public enum StpAccountControlLevelEnum 
+    public enum FfsAccountControlLevelEnum 
     {
 		  AR_LEVELCOMPANY,
       AR_LEVELACCOUNT,
@@ -561,7 +561,7 @@ namespace SmallPB.entitymodel
       
     };
        
-    public enum StpAccountRangeTypeEnum 
+    public enum FfsAccountRangeTypeEnum 
     {
 		  AR_RANGEALL,
       AR_RANGESET,
@@ -1187,7 +1187,7 @@ namespace SmallPB.entitymodel
         ///资金账户代码长度的定义
   	    public const int STP_ACCOUNTCODE_LEN = (30 + 1); 
         ///开平标志长度的定义
-  	    public const int STP_COMBOFFSETFLAG_LEN = (4 + 1); 
+  	    public const int STP_COMBOSTPETFLAG_LEN = (4 + 1); 
         ///投机套保标志长度的定义
   	    public const int STP_COMBHEDGEFLAG_LEN = (4 + 1); 
         ///被撤单引用长度的定义

@@ -2,3 +2,4 @@
 java -jar transfer/lib/transfer.jar ../dotnetcore/entitymodel/STPDataType.cs transfer/xml/EntityModel.xml transfer/xsl/DataType_template_cs.xsl
 java -jar transfer/lib/transfer.jar ../dotnetcore/entitymodel/STPDataStruct.cs transfer/xml/EntityModel.xml transfer/xsl/TFDataStruct_template_cs.xsl
 java -jar transfer/lib/transfer.jar ../dotnetcore/entitymodel/STPAllEnumInfo.cs transfer/xml/EntityModel.xml transfer/xsl/DataTypeToEnum_template_cs.xsl
+java -jar transfer/lib/transfer.jar ../dotnetcore/database/TradeContext.cs transfer/xml/EntityModel.xml transfer/xsl/DbContext_template_cs.xsl

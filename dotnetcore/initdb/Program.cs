@@ -1,4 +1,5 @@
 ﻿using System;
+using SmallPB.database;
 
 namespace initdb
 {
@@ -6,7 +7,18 @@ namespace initdb
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            if (args.Length != 2)
+            {
+                Console.WriteLine("usage: <program> <schema-name(bizdata|sync|trade|settle|dump)> <work-dir(./)>");
+                return;
+            }
+
+
+        }
+
+        public static TradeContext GetContext(string connectionString)
+        {
+            return ContextFactory.Create(connectionString);
         }
     }
 }
