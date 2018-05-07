@@ -14,558 +14,282 @@ namespace SmallPB.entitymodel
     
     public enum StpProductClassEnum 
     {
-		  PCFutures,
-      PCOptions,
-      PCStock,
-      PCBond,
-      PCFund,
-      PCIndex,
-      PCWarrant,
-      PCRepo,
-      PCOther,
-      
+		  PCFutures, PCOptions, PCStock, PCBond, PCFund, PCIndex, PCWarrant, PCRepo, PCOther
     };
        
     public enum StpInvestorRangeEnum 
     {
-		  IRAll,
-      IRGroup,
-      IRSingle,
-      IRAllInvestUnit,
-      IRSingleInvestUnit,
-      
+		  IRAll, IRGroup, IRSingle, IRAllInvestUnit, IRSingleInvestUnit
     };
        
     public enum StpProviderTypeEnum 
     {
-		  PTCtpFutureTd,
-      PTCtpFutureMd,
-      PTCtpFutureQry,
-      PTSTPOptionTd,
-      PTSTPOptionQry,
-      PTSTPStockTd,
-      PTSTPStockQry,
-      PTFemasFutureTd,
-      PTFemasFutureMd,
-      PTFemasFutureQry,
-      
+		  PTCtpFutureTd, PTCtpFutureMd, PTCtpFutureQry, PTSTPOptionTd, PTSTPOptionQry, PTSTPStockTd, PTSTPStockQry, PTFemasFutureTd, PTFemasFutureMd, PTFemasFutureQry
     };
        
     public enum StpDirectionEnum 
     {
-		  DBuy,
-      DSell,
-      DETFPur,
-      DETFRed,
-      DCashIn,
-      DPledgeBondIn,
-      DPledgeBondOut,
-      DDoublened,
-      DDepositoryTransfer,
-      DCreditDoublened,
-      DBuyCollateral,
-      DSellCollateral,
-      DCollateralTransferIn,
-      DCollateralTransferOut,
-      DMarginTrade,
-      DShortSell,
-      DRepayMargin,
-      DRepayStock,
-      DDirectRepayMargin,
-      DDirectRepayStock,
-      DExcessStockTransfer,
-      DOFPur,
-      DOFRed,
-      DSFSplit,
-      DSFMerge,
-      DCovered,
-      DFreeze,
-      DExecute,
-      DCBRed,
-      DCBConv,
-      DOFSub,
-      
+		  DBuy, DSell, DETFPur, DETFRed, DCashIn, DPledgeBondIn, DPledgeBondOut, DDoublened, DDepositoryTransfer, DCreditDoublened, DBuyCollateral, DSellCollateral, DCollateralTransferIn, DCollateralTransferOut, DMarginTrade, DShortSell, DRepayMargin, DRepayStock, DDirectRepayMargin, DDirectRepayStock, DExcessStockTransfer, DOFPur, DOFRed, DSFSplit, DSFMerge, DCovered, DFreeze, DExecute, DCBRed, DCBConv, DOFSub
     };
        
     public enum StpQryAccountTypeEnum 
     {
-		  QATOperate,
-      QATQuery,
-      
+		  QATOperate, QATQuery
     };
        
     public enum StpHedgeFlagEnum 
     {
-		  HFSpeculation,
-      HFArbitrage,
-      HFHedge,
-      HFMarketMaker,
-      
+		  HFSpeculation, HFArbitrage, HFHedge, HFMarketMaker
     };
        
     public enum StpUserTypeEnum 
     {
-		  UTInvestor,
-      UTOperator,
-      UTSuperUser,
-      
+		  UTInvestor, UTOperator, UTSuperUser
     };
        
     public enum StpCoveredFlagEnum 
     {
-		  CFUncovered,
-      CFCovered,
-      
+		  CFUncovered, CFCovered
     };
        
     public enum StpOwnerTypeEnum 
     {
-		  OT0,
-      OT1,
-      OT2,
-      OT3,
-      OT4,
-      OT5,
-      
+		  OT0, OT1, OT2, OT3, OT4, OT5
     };
        
     public enum StpInvestorLevelEnum 
     {
-		  IL1,
-      IL2,
-      IL3,
-      IL9,
-      
+		  IL1, IL2, IL3, IL9
     };
        
     public enum StpOffsetFlagEnum 
     {
-		  OFOpen,
-      OFClose,
-      OFForceClose,
-      OFCloseToday,
-      OFCloseYesterday,
-      OFForceOff,
-      OFLocalForceClose,
-      OFAuto,
-      OFCall,
-      OFPut,
-      
+		  OFOpen, OFClose, OFForceClose, OFCloseToday, OFCloseYesterday, OFForceOff, OFLocalForceClose, OFAuto, OFCall, OFPut
     };
        
     public enum StpOrderPriceTypeEnum 
     {
-		  OPTAnyPrice,
-      OPTLimitPrice,
-      OPTBestPrice,
-      OPTLastPrice,
-      OPTLocalBestPrice,
-      OPTFiveLevelPrice,
-      OPTPurchasesETF,
-      OPTRedeemETF,
-      
+		  OPTAnyPrice, OPTLimitPrice, OPTBestPrice, OPTLastPrice, OPTLocalBestPrice, OPTFiveLevelPrice, OPTPurchasesETF, OPTRedeemETF
     };
        
     public enum StpTimeConditionEnum 
     {
-		  TCIOC,
-      TCGFS,
-      TCGFD,
-      TCGTD,
-      TCGTC,
-      TCGFA,
-      
+		  TCIOC, TCGFS, TCGFD, TCGTD, TCGTC, TCGFA
     };
        
     public enum StpVolumeConditionEnum 
     {
-		  VCAV,
-      VCMV,
-      VCCV,
-      
+		  VCAV, VCMV, VCCV
     };
        
     public enum StpContingentConditionEnum 
     {
-		  CCImmediately,
-      CCTouch,
-      CCTouchProfit,
-      CCParkedOrder,
-      
+		  CCImmediately, CCTouch, CCTouchProfit, CCParkedOrder
     };
        
     public enum StpOrderStatusEnum 
     {
-		  OSTUnknown,
-      OSTPendingNew,
-      OSTNew,
-      OSTPartilyFilled,
-      OSTFilled,
-      OSTPartilyCanceled,
-      OSTCanceled,
-      OSTRejected,
-      
+		  OSTUnknown, OSTPendingNew, OSTNew, OSTPartilyFilled, OSTFilled, OSTPartilyCanceled, OSTCanceled, OSTRejected
     };
        
     public enum StpOrderTypeEnum 
     {
-		  ORDTNormal,
-      ORDTDeriveFromQuote,
-      ORDTDeriveFromCombination,
-      ORDTCombination,
-      ORDTConditionalOrder,
-      ORDTSwap,
-      
+		  ORDTNormal, ORDTDeriveFromQuote, ORDTDeriveFromCombination, ORDTCombination, ORDTConditionalOrder, ORDTSwap
     };
        
     public enum StpPosiDirectionEnum 
     {
-		  PDShort,
-      PDLong,
-      
+		  PDShort, PDLong
     };
        
     public enum StpChangeTypeEnum 
     {
-		  CGTcheck,
-      CGTfronzen,
-      CGTcurrent,
-      CGTcost,
-      
+		  CGTcheck, CGTfronzen, CGTcurrent, CGTcost
     };
        
     public enum StpCapitalDirectionEnum 
     {
-		  CPDNochange,
-      CPDIncrease,
-      CPDDecrease,
-      
+		  CPDNochange, CPDIncrease, CPDDecrease
     };
        
     public enum StpPositionDirectionEnum 
     {
-		  PSDNochange,
-      PSDIncrease,
-      PSDDecrease,
-      
+		  PSDNochange, PSDIncrease, PSDDecrease
     };
        
     public enum StpPositionDateEnum 
     {
-		  PSDToday,
-      PSDHistory,
-      
+		  PSDToday, PSDHistory
     };
        
     public enum StpTradingPhaseEnum 
     {
-		  TPNonTrade,
-      TPBidding,
-      TPContinuous,
-      TPSuspension,
-      TPFuse,
-      
+		  TPNonTrade, TPBidding, TPContinuous, TPSuspension, TPFuse
     };
        
     public enum StpOpenRestrictionEnum 
     {
-		  ORNone,
-      ORNoCoverOpen,
-      ORNoSellOpen,
-      ORNoSellAndCoverOpen,
-      ORNoBuyOpen,
-      ORNoBuyAndCoverOpen,
-      ORNoBuyAndSellOpen,
-      ORNoBuySellAndCoverOpen,
-      
+		  ORNone, ORNoCoverOpen, ORNoSellOpen, ORNoSellAndCoverOpen, ORNoBuyOpen, ORNoBuyAndCoverOpen, ORNoBuyAndSellOpen, ORNoBuySellAndCoverOpen
     };
        
     public enum StpPositionTypeEnum 
     {
-		  PTNet,
-      PTGross,
-      
+		  PTNet, PTGross
     };
        
     public enum StpPositionDateTypeEnum 
     {
-		  UseHistory,
-      NoUseHistory,
-      
+		  UseHistory, NoUseHistory
     };
        
     public enum StpInvestorTypeEnum 
     {
-		  ITPerson,
-      ITCompany,
-      ITFund,
-      ITSpecialOrgan,
-      ITAsset,
-      ITAdmin,
-      
+		  ITPerson, ITCompany, ITFund, ITSpecialOrgan, ITAsset, ITAdmin
     };
        
     public enum StpIDCardTypeEnum 
     {
-		  DCTEID,
-      DCTIDCard,
-      DCTOfficerIDCard,
-      DCTPoliceIDCard,
-      DCTSoldierIDCard,
-      DCTHouseholdRegister,
-      DCTPassport,
-      DCTTaiwanCompatriotIDCard,
-      DCTHomeComingCard,
-      DCTLicenseNo,
-      DCTTaxNo,
-      DCTHMMainlandTravelPermit,
-      DCTTwMainlandTravelPermit,
-      DCTDrivingLicense,
-      DCTSocialID,
-      DCTLocalID,
-      DCTBusinessRegistration,
-      DCTHKMCIDCard,
-      DCTAccountsPermits,
-      DCTPermanantResidence,
-      DCTAssetProductRecord,
-      DCTOtherCard,
-      
+		  DCTEID, DCTIDCard, DCTOfficerIDCard, DCTPoliceIDCard, DCTSoldierIDCard, DCTHouseholdRegister, DCTPassport, DCTTaiwanCompatriotIDCard, DCTHomeComingCard, DCTLicenseNo, DCTTaxNo, DCTHMMainlandTravelPermit, DCTTwMainlandTravelPermit, DCTDrivingLicense, DCTSocialID, DCTLocalID, DCTBusinessRegistration, DCTHKMCIDCard, DCTAccountsPermits, DCTPermanantResidence, DCTAssetProductRecord, DCTOtherCard
     };
        
     public enum StpTradingCodeTypeEnum 
     {
-		  TCSpeculation,
-      TCArbitrage,
-      TCHedge,
-      TCMarketMaker,
-      
+		  TCSpeculation, TCArbitrage, TCHedge, TCMarketMaker
     };
        
     public enum StpOptCommissionTypeEnum 
     {
-		  OPT_CTStrikeFee,
-      OPT_CTBeStrikeDFee,
-      OPT_CTTransferFee,
-      OPT_CTBrokerage,
-      OPT_CTTradeFee,
-      OPT_CTSettleFee,
-      
+		  OPT_CTStrikeFee, OPT_CTBeStrikeDFee, OPT_CTTransferFee, OPT_CTBrokerage, OPT_CTTradeFee, OPT_CTSettleFee
     };
        
     public enum StpCommDirectionEnum 
     {
-		  CDBuyOpen,
-      CDBuyClose,
-      CDSellOpen,
-      CDSellClose,
-      CDCallStrike,
-      CDPutStrike,
-      
+		  CDBuyOpen, CDBuyClose, CDSellOpen, CDSellClose, CDCallStrike, CDPutStrike
     };
        
     public enum StpRateTypeEnum 
     {
-		  RTByVolume,
-      RTByMoney,
-      RTByFace,
-      
+		  RTByVolume, RTByMoney, RTByFace
     };
        
     public enum StpOperationTypeEnum 
     {
-		  OPNTSync,
-      OPNTAdmin,
-      OPNTSettle,
-      OPNTOther,
-      
+		  OPNTSync, OPNTAdmin, OPNTSettle, OPNTOther
     };
        
     public enum StpOptionTypeEnum 
     {
-		  OPT_TYCall,
-      OPT_TYPut,
-      
+		  OPT_TYCall, OPT_TYPut
     };
        
     public enum StpSystemStatusEnum 
     {
-		  STSSyncDone,
-      STSTrading,
-      STSClosed,
-      STSSettled,
-      
+		  STSSyncDone, STSTrading, STSClosed, STSSettled
     };
        
     public enum StpInstrumentRangeEnum 
     {
-		  INSTRALL,
-      INSTRPRODUCT_CLASS,
-      INSTRSINGLE,
-      
+		  INSTRALL, INSTRPRODUCT_CLASS, INSTRSINGLE
     };
        
     public enum StpSeatTypeEnum 
     {
-		  STSHOPT,
-      STSHSTK,
-      STSZOPT,
-      STSZSTK,
-      STFEMAS,
-      
+		  STSHOPT, STSHSTK, STSZOPT, STSZSTK, STFEMAS
     };
        
     public enum StpResumeTypeEnum 
     {
-		  RTRestart,
-      RTResume,
-      RTQuick,
-      
+		  RTRestart, RTResume, RTQuick
     };
        
     public enum StpCompanyTypeEnum 
     {
-		  CTINSIDE,
-      CTORGAN,
-      CTUSER,
-      
+		  CTINSIDE, CTORGAN, CTUSER
     };
        
     public enum StpEnbFlagEnum 
     {
-		  EFNORMAL,
-      EFOFF,
-      EFLOCK,
-      EFUNSYNC,
-      
+		  EFNORMAL, EFOFF, EFLOCK, EFUNSYNC
     };
        
     public enum StpActionTypeEnum 
     {
-		  ACTCLIENT,
-      ACTWEB,
-      ACTMARKET,
-      
+		  ACTCLIENT, ACTWEB, ACTMARKET
     };
        
     public enum StpAuthTypeEnum 
     {
-		  AUTGENERAL,
-      AUTINSIDE,
-      AUTOUTSIDE,
-      
+		  AUTGENERAL, AUTINSIDE, AUTOUTSIDE
     };
        
     public enum StpFileFlagEnum 
     {
-		  InProgress,
-      Success,
-      Fail,
-      
+		  InProgress, Success, Fail
     };
        
     public enum StpMarketDataTypeEnum 
     {
-		  MDTREAL,
-      MDTHIS,
-      
+		  MDTREAL, MDTHIS
     };
        
     public enum StpPaySubjectEnum 
     {
-		  PSJGENERAL,
-      
+		  PSJGENERAL
     };
        
     public enum StpAccountTypeEnum 
     {
-		  ATSTOCK,
-      ATCREDIT,
-      ATDERIVATIVE,
-      ATFUTURES,
-      
+		  ATSTOCK, ATCREDIT, ATDERIVATIVE, ATFUTURES
     };
        
     public enum StpChannelTypeEnum 
     {
-		  CHTUFT,
-      CHTCTP,
-      CHTFEMAS,
-      CHTO32,
-      CHTSIMULATE,
-      
+		  CHTUFT, CHTCTP, CHTFEMAS, CHTO32, CHTSIMULATE
     };
        
     public enum StpFeeTypeEnum 
     {
-		  FTTRADEFEE,
-      FTSTAMPTAX,
-      FTTRANSFERFEE,
-      FTBROKERFEE,
-      FTHANDLINGFEE,
-      FTADMINFEE,
-      FTOTHERFEE,
-      FTCLEARINGFEE,
-      FTSETTLEFEE,
-      FTPERORDER,
-      FTPERCANCEL,
-      
+		  FTTRADEFEE, FTSTAMPTAX, FTTRANSFERFEE, FTBROKERFEE, FTHANDLINGFEE, FTADMINFEE, FTOTHERFEE, FTCLEARINGFEE, FTSETTLEFEE, FTPERORDER, FTPERCANCEL
     };
        
     public enum StpCalculateTypeEnum 
     {
-		  CTTOTAL,
-      CTPER,
-      
+		  CTTOTAL, CTPER
     };
        
     public enum StpCancelFlagEnum 
     {
-		  CFORDER,
-      CFCANCEL,
-      
+		  CFORDER, CFCANCEL
     };
        
     public enum StpStockRealBackEnum 
     {
-		  SRBFALSE,
-      SRBTRUE,
-      
+		  SRBFALSE, SRBTRUE
     };
        
     public enum StpFundRealBackEnum 
     {
-		  FRBFALSE,
-      FRBTRUE,
-      
+		  FRBFALSE, FRBTRUE
     };
        
     public enum StpInstrumentControlLevelEnum 
     {
-		  INSTC_LEVELPRODUCT_CLASS,
-      INSTC_LEVELSINGLE,
-      
+		  INSTC_LEVELPRODUCT_CLASS, INSTC_LEVELSINGLE
     };
        
     public enum StpInstrumentRangeTypeEnum 
     {
-		  INSTC_RANGEALL,
-      INSTC_RANGESET,
-      
+		  INSTC_RANGEALL, INSTC_RANGESET
     };
        
     public enum StpAccountControlLevelEnum 
     {
-		  AR_LEVELCOMPANY,
-      AR_LEVELACCOUNT,
-      AR_LEVELCOMBO,
-      
+		  AR_LEVELCOMPANY, AR_LEVELACCOUNT, AR_LEVELCOMBO
     };
        
     public enum StpAccountRangeTypeEnum 
     {
-		  AR_RANGEALL,
-      AR_RANGESET,
-      
+		  AR_RANGEALL, AR_RANGESET
     };
        
 

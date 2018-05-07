@@ -26,7 +26,7 @@ namespace SmallPB.database
         <xsl:variable name="keynum" select="Field[@iskey='yes']" />
         <xsl:if test="count($keynum)>0">
             /// total <xsl:value-of select="count($keynum)"/> key-elements
-            modelBuilder.Entity&lt;Stp<xsl:value-of select="$name"/>&gt;().HasIndex(b => new {<no_new_line />
+            modelBuilder.Entity&lt;Stp<xsl:value-of select="$name"/>&gt;().HasKey(b => new  {<no_new_line /> 
         </xsl:if>
         <xsl:for-each select="Field">
           <xsl:if test="@iskey='yes'">
@@ -34,7 +34,7 @@ namespace SmallPB.database
           </xsl:if>
         </xsl:for-each>
         <xsl:if test="count($keynum)>0">
-            }).IsUnique(true);
+            });
         </xsl:if>
       </xsl:if>
     </xsl:for-each>
@@ -42,14 +42,19 @@ namespace SmallPB.database
 
     <xsl:for-each select="/EntityModel/Entities/Entity"><no_new_line />
       <xsl:if test="@dbTable='yes'">
-        public DbSet&lt;Stp<xsl:value-of select="@name"/>&gt; <xsl:value-of select="@name"/>s { get; set; }
+        public DbSet&lt;Stp<xsl:value-of select="@name"/>&gt; <xsl:value-of select="@name"/> { get; set; }
       </xsl:if>
     </xsl:for-each>
     }
 <![CDATA[
+
     /// <summary>
     /// A factory to create an instance of the StudentsContext 
     /// </summary>
+    /// <remarks>
+    /// for MySQL, see https://dev.mysql.com/doc/connector-net/en/connector-net-entityframework-core.html
+    ///  Install-Package MySql.Data.EntityFrameworkCore -Version 8.0.11	
+    /// </remarks>
     public static class ContextFactory
     {
         public static TradeContext Create(string connectionString)
@@ -57,7 +62,14 @@ namespace SmallPB.database
             try
             {
                 var optionsBuilder = new DbContextOptionsBuilder<TradeContext>();
-                optionsBuilder.UseSqlite(connectionString);
+                if (IsMySQLConnectionString(connectionString))
+                {
+                    optionsBuilder.UseMySQL(connectionString);
+                }
+                else
+                {
+                    optionsBuilder.UseSqlite(connectionString);
+                }
 
                 // Ensure that the SQLite database and sechema is created!
                 var context = new TradeContext(optionsBuilder.Options);
@@ -71,7 +83,21 @@ namespace SmallPB.database
                 return null;
             }
         }
-    }
+
+        public static bool IsMySQLConnectionString(string connectionString)
+        {
+            return connectionString.Contains("server")
+                && connectionString.Contains("database")
+                && connectionString.Contains("user")
+                && connectionString.Contains("password")
+                ;
+        }
+
+        public static string MakeMySQLConnectionString(string schema, string server)
+        {
+            return $"server={server};database=pb_{schema};user=trade;password=zij/)Z3sO0;persistsecurityinfo=True;SslMode=none";
+        }
+	}
 ]]>
 }
   </xsl:template>

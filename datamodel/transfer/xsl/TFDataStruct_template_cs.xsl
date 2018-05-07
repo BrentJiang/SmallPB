@@ -7,7 +7,8 @@
 
   <xsl:template match="/">
 using System;
-using System.Runtime.InteropServices;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmallPB.entitymodel
 {<no_new_line />
@@ -15,14 +16,22 @@ namespace SmallPB.entitymodel
     ///<xsl:value-of select="@title"/>
     public class Stp<xsl:value-of select="translate(@name, ' ', '')"/> // struct
     {<no_new_line />
+	  <xsl:variable name="keynum" select="Field[@iskey='yes']" />
+	  <xsl:if test="count($keynum)=0">
+        [Key]
+        public Int64 SmallSysId { get; set; }
+	  </xsl:if>
       <xsl:for-each select="Field">
         <xsl:variable name="name" select="@name"/>
+        <xsl:variable name="position" select="position()"/>
         <xsl:for-each select="/EntityModel/Fields/Field[@name=$name]">
           <xsl:if test="position()=last()">
         ///<xsl:value-of select="@label"/>
+		//[Column("I<xsl:value-of select="$position"/>")]<no_new_line />
             <xsl:choose>
               <xsl:when test="@type='String'">
         //[MarshalAs(UnmanagedType.ByValTStr, SizeConst = CommonDef.STP_<xsl:value-of select="translate(@name, $lowercase, $uppercase)"/>_LEN)]
+		[StringLength(CommonDef.STP_<xsl:value-of select="translate(@name, $lowercase, $uppercase)"/>_LEN)]
         public string <xsl:value-of select="translate(@name, ' ', '')"/> { get; set; } <no_new_line />
               </xsl:when>
               <xsl:when test="@type='Int'">
@@ -55,7 +64,7 @@ namespace SmallPB.entitymodel
         </xsl:for-each>
       </xsl:for-each>
     };
-    </xsl:for-each>
+	</xsl:for-each>
 }
   </xsl:template>
 </xsl:stylesheet>

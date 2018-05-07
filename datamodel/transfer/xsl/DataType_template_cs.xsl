@@ -24,7 +24,7 @@ namespace SmallPB.entitymodel
     {
 		  <xsl:for-each select="enum">
         <!--use @name to set value of enum-->
-        <xsl:value-of select="$prefix"/><xsl:value-of select="translate(@name, ' ', '')"/>,
+        <xsl:value-of select="$prefix"/><xsl:value-of select="translate(@name, ' ', '')"/><xsl:if test="position()!=last()">, </xsl:if>
       </xsl:for-each>
     };
       <xsl:text> </xsl:text>
@@ -37,7 +37,7 @@ namespace SmallPB.entitymodel
     {
 		  <xsl:for-each select="enum">
         <!--use @name to set value of enum-->
-        <xsl:value-of select="$prefix"/><xsl:value-of select="translate(@name, ' ', '')"/>,
+        <xsl:value-of select="$prefix"/><xsl:value-of select="translate(@name, ' ', '')"/><xsl:if test="position()!=last()">, </xsl:if>
       </xsl:for-each>
     };
       <xsl:text> </xsl:text>
