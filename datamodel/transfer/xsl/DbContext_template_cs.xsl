@@ -7,6 +7,8 @@
 
   <xsl:template match="/">
 using System;
+using System.IO;
+using System.Net;
 using Microsoft.EntityFrameworkCore;
 using SmallPB.entitymodel;
 
@@ -96,6 +98,30 @@ namespace SmallPB.database
         public static string MakeMySQLConnectionString(string schema, string server)
         {
             return $"server={server};database=pb_{schema};user=trade;password=zij/)Z3sO0;persistsecurityinfo=True;SslMode=none";
+        }
+
+        public static TradeContext GetContext(string schema, string dbInfo)
+        {
+            TradeContext context = null;
+            IPAddress address = null;
+            try
+            {
+                if (IPAddress.TryParse(dbInfo, out address)) // IsUnc
+                {
+                    context = ContextFactory.Create(ContextFactory.MakeMySQLConnectionString(schema, dbInfo));
+                }
+                else
+                {
+                    var fn = $"{dbInfo.Replace('\\', '/').TrimEnd('/')}";
+                    Directory.CreateDirectory(fn);
+                    context = ContextFactory.Create($"DataSource={fn}/pb_{dbInfo.Trim()}.db");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return context;
         }
 	}
 ]]>

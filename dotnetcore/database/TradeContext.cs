@@ -1,5 +1,7 @@
 
 using System;
+using System.IO;
+using System.Net;
 using Microsoft.EntityFrameworkCore;
 using SmallPB.entitymodel;
 
@@ -318,7 +320,7 @@ namespace SmallPB.database
         public DbSet<StpPosChangeLog> PosChangeLog { get; set; }
       
         public DbSet<StpActChangeLog> ActChangeLog { get; set; }
-      
+
     }
 
 
@@ -371,7 +373,30 @@ namespace SmallPB.database
         {
             return $"server={server};database=pb_{schema};user=trade;password=zij/)Z3sO0;persistsecurityinfo=True;SslMode=none";
         }
-	}
 
+        public static TradeContext GetContext(string schema, string dbInfo)
+        {
+            TradeContext context = null;
+            IPAddress address = null;
+            try
+            {
+                if (IPAddress.TryParse(dbInfo, out address)) // IsUnc
+                {
+                    context = ContextFactory.Create(ContextFactory.MakeMySQLConnectionString(schema, dbInfo));
+                }
+                else
+                {
+                    var fn = $"{dbInfo.Replace('\\', '/').TrimEnd('/')}";
+                    Directory.CreateDirectory(fn);
+                    context = ContextFactory.Create($"DataSource={fn}/pb_{schema}.db");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return context;
+        }
+    }
 }
   
